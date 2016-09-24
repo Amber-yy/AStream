@@ -3,7 +3,9 @@
 #include <QLabel>
 #include <QPainter>
 
-tranWidget::tranWidget(int w, int h, QWidget *parent) : QWidget(parent),isLocked(false)
+#include <QDebug>
+
+tranWidget::tranWidget(int w, int h, QWidget *parent) : QWidget(parent),isLocked(false),isPress(false)
 {
 	try
 	{
@@ -48,14 +50,13 @@ void tranWidget::paintEvent(QPaintEvent *e)
 		QPainter paint(this);
 		paint.fillRect(titleWidget->rect(), QColor(102, 204, 250));
 	}
+
+	return QWidget::paintEvent(e);
 }
 
 void tranWidget::mouseReleaseEvent(QMouseEvent *)
 {
-	if (!isLocked)
-	{
-		isPress = false;
-	}
+	isPress = false;
 }
 
 void tranWidget::mousePressEvent(QMouseEvent *event)
@@ -66,9 +67,9 @@ void tranWidget::mousePressEvent(QMouseEvent *event)
 	}
 	if (titleWidget->isVisible())
 	{
+		lastPos = event->globalPos();
 		if (event->y() < titleWidget->height())
 		{
-			lastPos = event->globalPos();
 			isPress = true;
 		}
 	}

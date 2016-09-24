@@ -1,4 +1,9 @@
-﻿QPushButton#closeBt
+﻿QPushButton::menu-indicator
+{
+	image:None;
+}
+
+QPushButton#closeBt
 {
 	background-image:url("data/icon/closeNormal.png");
 	height:18px;

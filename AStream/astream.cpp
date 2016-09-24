@@ -7,6 +7,7 @@
 #include "searchList.h"
 #include "lyricsWidget.h"
 #include "screenShoter.h"
+#include "aboutPlayerWidget.h"
 
 #include <QCloseEvent>
 #include <QPushButton>
@@ -19,6 +20,8 @@
 #include <QTimer>
 #include <QTime>
 
+#include <QAction>
+#include <QMenu>
 #include <QDropEvent>
 #include <QMimeData>
 
@@ -596,8 +599,15 @@ void AStream::createSubCom()
 	deskLyricsBt = new QPushButton(this);
 	lyricsBar = new lyricsWidget(this);
 	shoter = new screenShoter("e:/");
-	shoter->setAutoSave(false);
-	shoter->hide();
+
+	aboutMenu=new QMenu(this);
+	aboutPlayer=new QAction(aboutMenu);
+	aboutKugou = new QAction(aboutMenu);
+	aboutQt = new QAction(aboutMenu);
+	aboutLAV = new QAction(aboutMenu);
+	aboutFF = new QAction(aboutMenu);
+	aboutPlayerW = new aboutPlayerWidget(420, 290, 0);
+
 }
 
 void AStream::readConfig()
@@ -716,6 +726,8 @@ void AStream::readConfig()
 	keepTrayIcon = set.value("keepTrayIcon").toInt();
 	isMute = set.value("isMute").toInt();
 	volume = set.value("volume").toInt();
+	shoter->setAutoSave(set.value("autoSave").toInt());
+	shoter->setFileRoute(set.value("autoSaveRoute").toString());
 	currentMode = static_cast<playMode>(set.value("currentMode").toInt());
 	isDeskLrc = set.value("isDeskLrc").toInt();
 	setIsDesk(isDeskLrc);
@@ -729,7 +741,25 @@ void AStream::readConfig()
 	}
 	setLock(set.value("isDeskLrcLock").toInt());
 	searchResult->hide();
+	shoter->hide();
 	searchResult->setMaxSize(set.value("maxSearchSize").toInt());
+
+	aboutPlayer->setText(u8"关于yy播放器");
+	aboutQt->setText(u8"关于Qt");
+	aboutKugou->setText(u8"关于酷狗");
+	aboutLAV->setText(u8"关于LAV Filter");
+	aboutFF->setText(u8"关于FFMPEG");
+
+	aboutMenu->addAction(aboutPlayer);
+	aboutMenu->addAction(aboutQt);
+	aboutMenu->addAction(aboutKugou);
+	aboutMenu->addAction(aboutLAV);
+	aboutMenu->addAction(aboutFF);
+	helpBt->setMenu(aboutMenu);
+
+	aboutPlayerW->hide();
+	connect(aboutPlayer, &QAction::triggered, aboutPlayerW, &QWidget::show);
+
 }
 
 void AStream::setSubObjectName()

@@ -14,7 +14,6 @@ resultWidget::resultWidget(QVector<QRect> &geo,QWidget *parents)
 		singerName = new QLabel(this);
 		duration = new QLabel(this);
 
-
 		play = new QPushButton(this);
 		add = new QPushButton(this);
 		downLoad = new QPushButton(this);

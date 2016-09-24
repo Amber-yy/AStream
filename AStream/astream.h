@@ -20,7 +20,10 @@ class QLabel;
 class QSlider;
 class QMediaPlayer;
 class QTimer;
+class QMenu;
+class QAction;
 class screenShoter;
+class aboutPlayerWidget;
 
 class AStream : public QWidget,public QAbstractNativeEventFilter
 {
@@ -109,6 +112,13 @@ protected:
 	QLabel *songName, *progress,*playerIcon;
 	QSlider *songSlider, *volumeSlider;
 	musicAPI *musicDownLoader,*musicProvider;
+	QMenu *aboutMenu;
+	QAction *aboutPlayer;
+	QAction *aboutKugou;
+	QAction *aboutQt;
+	QAction *aboutLAV;
+	QAction *aboutFF;
+	aboutPlayerWidget *aboutPlayerW;
 	playMode currentMode;
 	static const size_t maxSongName=34;
 	size_t maxDuration,playProgress;

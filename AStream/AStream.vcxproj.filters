@@ -176,6 +176,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_screenShoter.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="aboutPlayerWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="astream.h">
@@ -233,6 +236,9 @@
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_astream.h">
       <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aboutPlayerWidget.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

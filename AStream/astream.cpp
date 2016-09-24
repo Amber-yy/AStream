@@ -606,7 +606,7 @@ void AStream::createSubCom()
 	aboutQt = new QAction(aboutMenu);
 	aboutLAV = new QAction(aboutMenu);
 	aboutFF = new QAction(aboutMenu);
-	aboutPlayerW = new aboutPlayerWidget(420, 290, 0);
+	aboutPlayerW = new aboutPlayerWidget(420, 310, 0);
 
 }
 
@@ -1034,6 +1034,10 @@ void AStream::paintEvent(QPaintEvent *e)
 {
 	QPainter pa(this);
 	pa.drawPixmap(rect(),skin);
+
+	QPainter r(this);
+	r.fillRect(QRect(330, 70, 540, 40), QBrush(QColor(100, 100, 100, 200), Qt::SolidPattern));
+
 }
 
 void AStream::mouseReleaseEvent(QMouseEvent *event)

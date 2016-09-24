@@ -132,6 +132,11 @@ QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
     background: none;
 }
 
+QLabel#songName
+{
+	color:#333;
+}
+
 QLabel#currentSongName
 {
 	color:white;

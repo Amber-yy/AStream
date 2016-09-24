@@ -19,5 +19,6 @@ protected:
 	QLabel *thanks;
 	QLabel *thanks1;
 	QLabel *thanks2;
+	QLabel *thanks3;
 	QPushButton *submit;
 };

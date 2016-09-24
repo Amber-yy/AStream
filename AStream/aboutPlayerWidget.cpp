@@ -30,6 +30,7 @@ aboutPlayerWidget::aboutPlayerWidget(int w, int h, QWidget * parent):tranWidget(
 		thanks = new QLabel(this);
 		thanks1 = new QLabel(this);
 		thanks2 = new QLabel(this);
+		 thanks3 = new QLabel(this);
 		submit = new QPushButton(this);
 
 		promt->setGeometry(3, 50, width, 20);
@@ -41,7 +42,8 @@ aboutPlayerWidget::aboutPlayerWidget(int w, int h, QWidget * parent):tranWidget(
 		thanks->setGeometry(3, 190, width, 20);
 		thanks1->setGeometry(3,210, width, 20);
 		thanks2->setGeometry(3, 230, width, 20);
-		submit->setGeometry(180, 255, 60,30);
+		thanks3->setGeometry(3, 250, width, 20);
+		submit->setGeometry(180, 275, 60,30);
 
 		setTitle(set.value("Main/title").toString());
 		num = set.value("Main/color").toString().split(' ');
@@ -56,6 +58,7 @@ aboutPlayerWidget::aboutPlayerWidget(int w, int h, QWidget * parent):tranWidget(
 		thanks->setText(set.value("Main/thanksWord").toString());
 		thanks1->setText(set.value("Main/thanks1Word").toString());
 		thanks2->setText(set.value("Main/thanks2Word").toString());
+		thanks3->setText(set.value("Main/thanks3Word").toString());
 		submit->setText(set.value("Main/submitWord").toString());
 
 		connect(submit, &QPushButton::clicked, this, &QWidget::hide);

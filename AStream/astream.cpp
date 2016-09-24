@@ -999,7 +999,6 @@ bool AStream::eventFilter(QObject *obj, QEvent *e)
 				e->accept();
 				return true;
 			}
-			
 		}
 		return false;
 	};

@@ -1,0 +1,207 @@
+QPushButton#playButton
+{
+	border-image:url("data/icon/playNormal.png");
+	margin-left:4px;
+	height:32px;
+	width:32px;
+	border:0px;
+} 
+
+QPushButton#playButton:hover
+{
+	border-image:url("data/icon/playHover.png");
+	margin-left:4px;
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#playButton:pressed
+{
+	border-image:url("data/icon/playPress.png");
+	margin-left:4px;
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#pauseButton
+{
+	border-image:url("data/icon/pauseNormal.png");
+	height:32px;
+	width:32px;
+	border:0px;
+} 
+
+QPushButton#pauseButton:hover
+{
+	border-image:url("data/icon/pauseHover.png");
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#pauseButton:pressed
+{
+	border-image:url("data/icon/pausePress.png");
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#prevButton
+{
+	border-image:url("data/icon/backNormal.png");
+	height:32px;
+	width:32px;
+	border:0px;
+} 
+
+QPushButton#prevButton:hover
+{
+	border-image:url("data/icon/backHover.png");
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#prevButton:pressed
+{
+	border-image:url("data/icon/backPress.png");
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#nextButton
+{
+	border-image:url("data/icon/forwardNormal.png");
+	height:32px;
+	width:32px;
+	border:0px;
+} 
+
+QPushButton#nextButton:hover
+{
+	border-image:url("data/icon/forwardHover.png");
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#nextButton:pressed
+{
+	border-image:url("data/icon/forwardPress.png");
+	height:32px;
+	width:32px;
+	border:0px;
+}
+
+QPushButton#textButton
+{
+	border:0px;
+}
+
+QWidget
+{
+	background-color:rgb(102,204,255);
+	font: 12pt "楷体";
+	border:0px;
+}
+
+QSlider#volumeSlider::groove:horizontal
+{
+	background: grey; 
+	height:2px;
+	left:8px;
+	right:8px;
+}
+
+QSlider#volumeSlider::handle:horizontal
+{
+	border-image:url("data/icon/voicHandle.png"); 
+	margin:-4 -6px;
+}
+
+QSlider#volumeSlider::sub-page:horizontal 
+{
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1,stop:1 #c4c4c4);
+	background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1, stop: 0 #bbf, stop: 1 #55f);  
+}
+
+QSlider#volumeSlider::add-page:horizontal 
+{
+	background: grey;
+}
+
+QPushButton#lowVolButton
+{
+	border-image:url("data/icon/soundNormal1.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#lowVolButton:hover
+{
+	border-image:url("data/icon/soundHover1.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#lowVolButton:pressed
+{
+	border-image:url("data/icon/soundPress1.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#highVolButton
+{
+	border-image:url("data/icon/soundNormal2.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#highVolButton:hover
+{
+	border-image:url("data/icon/soundHover2.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#highVolButton:pressed
+{
+	border-image:url("data/icon/soundPress2.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#muteButton
+{
+	border-image:url("data/icon/soundNormal3.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#muteButton:hover
+{
+	border-image:url("data/icon/soundHover3.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}
+
+QPushButton#muteButton:pressed
+{
+	border-image:url("data/icon/soundPress3.png");
+	height:27px;
+	width:27px;
+	border:0px;
+}

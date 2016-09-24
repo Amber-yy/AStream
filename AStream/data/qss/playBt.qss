@@ -1,0 +1,35 @@
+﻿QPushButton#playBt
+{
+	border-image:url("data/icon/playBtNormal.png");
+	border:0px;
+}
+
+QPushButton#playBt:hover
+{
+	border-image:url("data/icon/playBtHover.png");
+	border:0px;
+}
+
+QPushButton#playBt:pressed
+{
+	border-image:url("data/icon/playBtPress.png");
+	border:0px;
+}
+
+QPushButton#pauseBt
+{
+	border-image:url("data/icon/pauseBtNormal.png");
+	border:0px;
+}
+
+QPushButton#pauseBt:hover
+{
+	border-image:url("data/icon/pauseBtHover.png");
+	border:0px;
+}
+
+QPushButton#pauseBt:pressed
+{
+	border-image:url("data/icon/pauseBtPress.png");
+	border:0px;
+}

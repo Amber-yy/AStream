@@ -1,0 +1,318 @@
+﻿QPushButton#closeBt
+{
+	background-image:url("data/icon/closeNormal.png");
+	height:18px;
+	width:23px;
+	border:0px;
+} 
+
+QPushButton#closeBt:hover
+{
+	background-image:url("data/icon/closeHover.png");
+	height:18px;
+	width:23px;
+	border:0px;
+}
+
+QPushButton#closeBt:pressed
+{
+	background-image:url("data/icon/closePress.png");
+	height:18px;
+	width:23px;
+	border:0px;
+}
+
+QPushButton#minBt
+{
+	background-image:url("data/icon/minNormal.png");
+	height:18px;
+	width:23px;
+	border:0px;
+} 
+
+QPushButton#minBt:hover
+{
+	background-image:url("data/icon/minHover.png");
+	height:18px;
+	width:23px;
+	border:0px;
+}
+
+QPushButton#minBt:pressed
+{
+	background-image:url("data/icon/minPress.png");
+	height:18px;
+	width:23px;
+	border:0px;
+}
+
+QListWidget
+{
+	background-color:rgba(250,250,250,0.3);
+	border:0px;
+}
+
+QListWidget::item
+{
+	height:35px;
+}
+
+QListView#searchResult
+{
+	background-color:rgba(250,250,250,0.3);
+	border:0px;
+}
+
+QLineEdit#searchEditor
+{   
+	background-color:rgba(255,255,255);
+	border-radius:15px;
+	border:1px;
+}
+
+QPushButton#prevBt
+{
+	border-image:url("data/icon/leftNormal.png");
+	border:0px;
+}
+
+QPushButton#prevBt:hover
+{
+	border-image:url("data/icon/leftHover.png");
+	border:0px;
+}
+
+QPushButton#prevBt:pressed
+{
+	border-image:url("data/icon/leftPress.png");
+	border:0px;
+}
+
+QPushButton#nextBt
+{
+	border-image:url("data/icon/rightNormal.png");
+	border:0px;
+}
+
+QPushButton#nextBt:hover
+{
+	border-image:url("data/icon/rightHover.png");
+	border:0px;
+}
+
+QPushButton#nextBt:pressed
+{
+	border-image:url("data/icon/rightPress.png");
+	border:0px;
+}
+
+QPushButton#searchBt
+{
+	border-image:url("data/icon/searchNormal.png");
+	border:0px;
+}
+
+QPushButton#searchBt:hover
+{
+	border-image:url("data/icon/searchHover.png");
+	border:0px;
+}
+
+QPushButton#searchBt:pressed
+{
+	border-image:url("data/icon/searchPress.png");
+	border:0px;
+}
+
+QPushButton#skinBt
+{
+	border-image:url("data/icon/skinNormal.png");
+	border:0px;
+}
+
+QPushButton#skinBt:hover
+{
+	border-image:url("data/icon/skinHover.png");
+	border:0px;
+}
+
+QPushButton#skinBt:pressed
+{
+	border-image:url("data/icon/skinPress.png");
+	border:0px;
+}
+
+QPushButton#setBt
+{
+	border-image:url("data/icon/setNormal.png");
+	border:0px;
+}
+
+QPushButton#setBt:hover
+{
+	border-image:url("data/icon/setHover.png");
+	border:0px;
+}
+
+QPushButton#setBt:pressed
+{
+	border-image:url("data/icon/setPress.png");
+	border:0px;
+}
+
+QPushButton#thorBt
+{
+	border-image:url("data/icon/thorNormal.png");
+	border:0px;
+}
+
+QPushButton#thorBt:hover
+{
+	border-image:url("data/icon/thorHover.png");
+	border:0px;
+}
+
+QPushButton#thorBt:pressed
+{
+	border-image:url("data/icon/thorPress.png");
+	border:0px;
+}
+
+QPushButton#helpBt
+{
+	border-image:url("data/icon/helpNormal.png");
+	border:0px;
+}
+
+QPushButton#helpBt:hover
+{
+	border-image:url("data/icon/helpHover.png");
+	border:0px;
+}
+
+QPushButton#helpBt:pressed
+{
+	border-image:url("data/icon/helpPress.png");
+	border:0px;
+}
+
+
+QPushButton#downLoadBt
+{
+	border-image:url("data/icon/downLoadNormal.png");
+	border:0px;
+}
+
+QPushButton#downLoadBt:hover
+{
+	border-image:url("data/icon/downLoadHover.png");
+	border:0px;
+}
+
+QPushButton#downLoadBt:pressed
+{
+	border-image:url("data/icon/downLoadPress.png");
+	border:0px;
+}
+
+QPushButton#musicLibBt
+{
+	border-image:url("data/icon/musicLibNormal.png");
+	border:0px;
+}
+
+QPushButton#musicLibBt:hover
+{
+	border-image:url("data/icon/musicLibHover.png");
+	border:0px;
+}
+
+QPushButton#musicLibBt:pressed
+{
+	border-image:url("data/icon/musicLibPress.png");
+	border:0px;
+}
+
+QPushButton#lyricsBt
+{
+	border-image:url("data/icon/lyricsBtNormal.png");
+	border:0px;
+}
+
+QPushButton#lyricsBt:hover
+{
+	border-image:url("data/icon/lyricsBtHover.png");
+	border:0px;
+}
+
+QPushButton#lyricsBt:pressed
+{
+	border-image:url("data/icon/lyricsBtPress.png");
+	border:0px;
+}
+
+QSlider#songSlider::groove:horizontal
+{
+	background: grey; 
+	height:2px;
+	left:8px;
+	right:8px;
+}
+
+QSlider#songSlider::handle:horizontal
+{
+	background-color:white;
+	margin:-3px -4px;
+	border-radius:3px;
+}
+
+QSlider#songSlider::sub-page:horizontal 
+{
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1,stop:1 #c4c4c4);
+	background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1, stop: 0 #bbf, stop: 1 #55f);  
+}
+
+QSlider#songSlider::add-page:horizontal 
+{
+	background: grey;
+}
+
+QSlider#volumeSlider::groove:horizontal
+{
+	background: grey; 
+	height:2px;
+	left:8px;
+	right:8px;
+}
+
+QSlider#volumeSlider::handle:horizontal
+{
+	background-color:white;
+	margin:-3px -4px;
+	border-radius:3px;
+}
+
+QSlider#volumeSlider::sub-page:horizontal 
+{
+	background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #00FF00,stop:1 #c4c4c4);
+	background: qlineargradient(x1: 0, y1: 0.2, x2: 1, y2: 1, stop: 0 #bbf, stop: 1 #55f);  
+}
+
+QSlider#volumeSlider::add-page:horizontal 
+{
+	background: grey;
+}
+
+QLabel
+{
+	color:white;
+	font-weight:800;
+}
+
+QLabel#playerIcon
+{
+	border-image:url("data/icon/kugou.png");
+}
+
+
+

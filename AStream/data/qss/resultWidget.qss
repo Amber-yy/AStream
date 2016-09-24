@@ -1,0 +1,107 @@
+﻿QPushButton#playBt
+{
+	border-image:url("data/icon/playNormal1.png");
+}
+
+QPushButton#playBt:hover
+{
+	border-image:url("data/icon/playHover1.png");
+}
+
+QPushButton#playBt:pressed
+{
+	border-image:url("data/icon/playPress1.png");
+}
+
+QPushButton#downLoadBt
+{
+	border-image:url("data/icon/downloadNormal1.png");
+}
+
+QPushButton#downLoadBt:hover
+{
+	border-image:url("data/icon/downloadHover1.png");
+}
+
+QPushButton#downLoadBt:pressed
+{
+	border-image:url("data/icon/downloadPress1.png");
+}
+
+QPushButton#addBt
+{
+	border-image:url("data/icon/addNormal.png");
+}
+
+QPushButton#addBt:hover
+{
+	border-image:url("data/icon/addHover.png");
+}
+
+QPushButton#addBt:pressed
+{
+	border-image:url("data/icon/addPress.png");
+}
+
+QLabel
+{
+	color:rgb(100,100,250);
+	font-weight:800;
+}
+
+QLabel#songName
+{
+	color:black;
+	font-weight:200;
+}
+
+QLabel#singerName
+{
+	color:black;
+	font-weight:200;
+}
+
+QLabel#duration
+{
+	color:black;
+	font-weight:200;
+}
+
+
+QScrollBar:vertical 
+{              
+    background:transparent;  
+    width:9px;  
+    margin: 0px 0px 2px 0px;  
+}  
+  
+QScrollBar::handle:vertical 
+{	
+    background: rgba(195, 195, 195,0.5);  
+    min-height: 20px;  
+    border-radius: 4px;  
+}  
+  
+QScrollBar::handle:vertical:hover
+{
+    background:rgba(0,0,0,0.3);  
+}  
+  
+QScrollBar::add-line:vertical
+{
+    height: 0px;  
+    subcontrol-position: bottom;  
+    subcontrol-origin: margin;  
+}  
+  
+QScrollBar::sub-line:vertical
+{
+    height: 0px;  
+    subcontrol-position: top;  
+    subcontrol-origin: margin;  
+}  
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: none;
+}

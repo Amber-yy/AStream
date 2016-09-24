@@ -1,0 +1,35 @@
+﻿QPushButton#likeBt
+{
+	border-image:url("data/icon/likeNormal.png");
+	border:0px;
+}
+
+QPushButton#likeBt:hover
+{
+	border-image:url("data/icon/likeHover.png");
+	border:0px;
+}
+
+QPushButton#likeBt:pressed
+{
+	border-image:url("data/icon/likePress.png");
+	border:0px;
+}
+
+QPushButton#ulikeBt
+{
+	border-image:url("data/icon/ulikeNormal.png");
+	border:0px;
+}
+
+QPushButton#ulikeBt:hover
+{
+	border-image:url("data/icon/ulikeHover.png");
+	border:0px;
+}
+
+QPushButton#ulikeBt:pressed
+{
+	border-image:url("data/icon/ulikePress.png");
+	border:0px;
+}

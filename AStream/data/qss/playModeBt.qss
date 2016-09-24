@@ -1,0 +1,73 @@
+﻿QPushButton#orderPlayBt
+{
+	border-image:url("data/icon/orderPlayNormal.png");
+	border:0px;
+}
+
+QPushButton#orderPlayBt:hover
+{
+	border-image:url("data/icon/orderPlayHover.png");
+	border:0px;
+}
+
+QPushButton#orderPlayBt:pressed
+{
+	border-image:url("data/icon/orderPlayPress.png");
+	border:0px;
+}
+
+
+QPushButton#singleLoopBt
+{
+	border-image:url("data/icon/singleLoopNormal.png");
+	border:0px;
+}
+
+QPushButton#singleLoopBt:hover
+{
+	border-image:url("data/icon/singleLoopHover.png");
+	border:0px;
+}
+
+QPushButton#singleLoopBt:pressed
+{
+	border-image:url("data/icon/singleLoopPress.png");
+	border:0px;
+}
+
+
+QPushButton#listLoopBt
+{
+	border-image:url("data/icon/listLoopNormal.png");
+	border:0px;
+}
+
+QPushButton#listLoopBt:hover
+{
+	border-image:url("data/icon/listLoopHover.png");
+	border:0px;
+}
+
+QPushButton#listLoopBt:pressed
+{
+	border-image:url("data/icon/listLoopPress.png");
+	border:0px;
+}
+
+QPushButton#randomPlayBt
+{
+	border-image:url("data/icon/randomPlayNormal.png");
+	border:0px;
+}
+
+QPushButton#randomPlayBt:hover
+{
+	border-image:url("data/icon/randomPlayHover.png");
+	border:0px;
+}
+
+QPushButton#randomPlayBt:pressed
+{
+	border-image:url("data/icon/randomPlayPress.png");
+	border:0px;
+}

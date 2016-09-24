@@ -1,0 +1,29 @@
+﻿QPushButton#lrcShow
+{
+	border-image:url("data/icon/lrcShowNormal.png");
+}
+
+QPushButton#lrcShow:hover
+{
+	border-image:url("data/icon/lrcShowHover.png");
+}
+
+QPushButton#lrcShow:Pressed
+{
+	border-image:url("data/icon/lrcShowPress.png");
+}
+
+QPushButton#lrcHide
+{
+	border-image:url("data/icon/lrcHideNormal.png");
+}
+
+QPushButton#lrcHide:hover
+{
+	border-image:url("data/icon/lrcHideHover.png");
+}
+
+QPushButton#lrcHide:Pressed
+{
+	border-image:url("data/icon/lrcHidePress.png");
+}

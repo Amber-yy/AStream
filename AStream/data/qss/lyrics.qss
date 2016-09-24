@@ -1,0 +1,39 @@
+﻿QLabel#first
+{
+	font-size:18px;
+	font-family:微软雅黑;
+	font-weight:300;
+	color:rgb(102,204,250);
+}
+
+QLabel#second
+{
+	font-size:18px;
+	font-family:微软雅黑;
+	font-weight:300;
+	color:rgb(102,204,250);
+}
+
+QLabel#third
+{
+	font-size:22px;
+	font-family:微软雅黑;
+	font-weight:300;
+	color:white;
+}
+
+QLabel#fourth
+{
+	font-size:18px;
+	font-family:微软雅黑;
+	font-weight:300;
+	color:rgb(102,204,250);
+}
+
+QLabel#fifth
+{
+	font-size:18px;
+	font-family:微软雅黑;
+	font-weight:300;
+	color:rgb(102,204,250);
+}

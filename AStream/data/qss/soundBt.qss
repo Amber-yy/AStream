@@ -1,0 +1,53 @@
+﻿QPushButton#lowVolBt
+{
+	border-image:url("data/icon/lowVolNormal.png");
+	border:0px;
+}
+
+QPushButton#lowVolBt:hover
+{
+	border-image:url("data/icon/lowVolHover.png");
+	border:0px;
+}
+
+QPushButton#lowVolBt:pressed
+{
+	border-image:url("data/icon/lowVolPress.png");
+	border:0px;
+}
+
+QPushButton#highVolBt
+{
+	border-image:url("data/icon/highVolNormal.png");
+	border:0px;
+}
+
+QPushButton#highVolBt:hover
+{
+	border-image:url("data/icon/highVolHover.png");
+	border:0px;
+}
+
+QPushButton#highVolBt:pressed
+{
+	border-image:url("data/icon/highVolPress.png");
+	border:0px;
+}
+
+QPushButton#muteBt
+{
+	border-image:url("data/icon/muteNormal.png");
+	border:0px;
+}
+
+QPushButton#muteBt:hover
+{
+	border-image:url("data/icon/muteHover.png");
+	border:0px;
+}
+
+QPushButton#muteBt:pressed
+{
+	border-image:url("data/icon/mutePress.png");
+	border:0px;
+}

@@ -967,7 +967,6 @@ void AStream::playHandle(qint64 duration)
 	{
 		tray->setPause(false);
 	}
-
 	maxDuration = duration / 1000;
 	songSlider->setRange(0, maxDuration);
 	playProgress = 0;

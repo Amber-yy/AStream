@@ -310,14 +310,11 @@ QSlider#volumeSlider::add-page:horizontal
 
 QLabel
 {
-	color:white;
-	font-weight:800;
+	color:black;
 }
 
 QLabel#playerIcon
 {
 	border-image:url("data/icon/kugou.png");
 }
-
-
 

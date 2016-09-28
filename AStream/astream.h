@@ -8,6 +8,8 @@
 #include <random>
 #include "songWidget.h"
 
+#include <stdio.h>
+
 class lrcDecoder;
 class trayIcon;
 class songsList;

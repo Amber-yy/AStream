@@ -20,6 +20,7 @@
 #include <QTimer>
 #include <QTime>
 
+
 #include <QAction>
 #include <QMenu>
 #include <QDropEvent>
@@ -27,6 +28,7 @@
 
 #include "desktopLyrics.h"
 
+#include <QApplication>
 #include <QCoreApplication>
 #include <QMessageBox>
 #include <QDebug>
@@ -52,7 +54,7 @@ AStream::AStream(QWidget *parent)
 		tray->show();
 		setWindowIcon(tray->icon());
 		setWindowFlags(Qt::FramelessWindowHint);
-		
+
 	}
 	catch (std::bad_alloc &)
 	{
@@ -73,6 +75,7 @@ void AStream::exit()
 
 void AStream::pauseSong(bool b)
 {
+
 	if (isBlock)
 	{
 		auto song = playList->getCurrentWidget();
@@ -760,6 +763,8 @@ void AStream::readConfig()
 	aboutPlayerW->hide();
 	connect(aboutPlayer, &QAction::triggered, aboutPlayerW, &QWidget::show);
 
+	connect(aboutQt, &QAction::triggered, [this]{QMessageBox::aboutQt(this); });
+	
 }
 
 void AStream::setSubObjectName()

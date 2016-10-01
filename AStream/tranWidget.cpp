@@ -23,8 +23,6 @@ tranWidget::tranWidget(int w, int h, QWidget *parent) : QWidget(parent),isLocked
 		titleWidget->setGeometry(0, 0, w, 30);
 		titleText->setGeometry(0, 0, w, 30);
 		titleText->setFont(QFont(u8"Î¢ÈíÑÅºÚ"));
-
-		setColor(QColor(102, 204, 250));
 	}
 	catch (std::bad_alloc &)
 	{

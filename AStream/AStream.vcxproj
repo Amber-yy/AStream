@@ -76,6 +76,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="aboutFFMPEGWidget.cpp" />
+    <ClCompile Include="aboutKGWidget.cpp" />
+    <ClCompile Include="aboutLAVWidget.cpp" />
     <ClCompile Include="aboutPlayerWidget.cpp" />
     <ClCompile Include="astream.cpp" />
     <ClCompile Include="desktopLyrics.cpp" />
@@ -255,6 +258,9 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_DLL -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_MULTIMEDIA_LIB -DQT_NETWORK_LIB -DQT_WIDGETS_LIB "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtMultimedia" "-I$(QTDIR)\include\QtNetwork" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
+    <ClInclude Include="aboutFFMPEGWidget.h" />
+    <ClInclude Include="aboutKGWidget.h" />
+    <ClInclude Include="aboutLAVWidget.h" />
     <ClInclude Include="aboutPlayerWidget.h" />
     <ClInclude Include="GeneratedFiles\ui_astream.h" />
     <CustomBuild Include="tranWidget.h">

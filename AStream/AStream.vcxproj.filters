@@ -179,6 +179,15 @@
     <ClCompile Include="aboutPlayerWidget.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="aboutKGWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aboutLAVWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aboutFFMPEGWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="astream.h">
@@ -238,6 +247,15 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="aboutPlayerWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aboutKGWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aboutLAVWidget.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="aboutFFMPEGWidget.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

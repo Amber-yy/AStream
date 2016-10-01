@@ -26,6 +26,9 @@ class QMenu;
 class QAction;
 class screenShoter;
 class aboutPlayerWidget;
+class aboutKGWidget;
+class aboutLAVWidget;
+class aboutFFMPEGWidget;
 
 class AStream : public QWidget,public QAbstractNativeEventFilter
 {
@@ -121,6 +124,9 @@ protected:
 	QAction *aboutLAV;
 	QAction *aboutFF;
 	aboutPlayerWidget *aboutPlayerW;
+	aboutKGWidget *aboutKG;
+	aboutLAVWidget *aboutLAVW;
+	aboutFFMPEGWidget *aboutFFW;
 	playMode currentMode;
 	static const size_t maxSongName=34;
 	size_t maxDuration,playProgress;

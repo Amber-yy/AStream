@@ -8,6 +8,9 @@
 #include "lyricsWidget.h"
 #include "screenShoter.h"
 #include "aboutPlayerWidget.h"
+#include "aboutKGWidget.h"
+#include "aboutLAVWidget.h"
+#include "aboutFFMPEGWidget.h"
 
 #include <QCloseEvent>
 #include <QPushButton>
@@ -610,6 +613,9 @@ void AStream::createSubCom()
 	aboutLAV = new QAction(aboutMenu);
 	aboutFF = new QAction(aboutMenu);
 	aboutPlayerW = new aboutPlayerWidget(420, 310, 0);
+	aboutKG = new aboutKGWidget(250, 240, 0);
+	aboutLAVW = new aboutLAVWidget(320, 180, 0);
+	aboutFFW = new aboutFFMPEGWidget(320, 240, 0);
 
 }
 
@@ -761,10 +767,10 @@ void AStream::readConfig()
 	helpBt->setMenu(aboutMenu);
 
 	aboutPlayerW->hide();
-	connect(aboutPlayer, &QAction::triggered, aboutPlayerW, &QWidget::show);
+	aboutKG->hide();
+	aboutLAVW->hide();
+	aboutFFW->hide();
 
-	connect(aboutQt, &QAction::triggered, [this]{QMessageBox::aboutQt(this); });
-	
 }
 
 void AStream::setSubObjectName()
@@ -886,6 +892,12 @@ void AStream::connectSignal()
 	connect(musicLibBt, &QPushButton::clicked, this, &AStream::showResult);
 	connect(lyricsBt, &QPushButton::clicked,this,&AStream::showLyrics);
 
+	connect(aboutPlayer, &QAction::triggered, aboutPlayerW, &QWidget::show);
+	connect(aboutQt, &QAction::triggered, [this] {QMessageBox::aboutQt(this); });
+	connect(aboutKugou, &QAction::triggered, aboutKG, &QWidget::show);
+	connect(aboutLAV, &QAction::triggered, aboutLAVW,&QWidget::show);
+	connect(aboutFF, &QAction::triggered, aboutFFW, &QWidget::show);
+	
 	songSlider->installEventFilter(this);
 	volumeSlider->installEventFilter(this);
 }

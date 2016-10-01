@@ -23,36 +23,28 @@ QT_BEGIN_NAMESPACE
 class Ui_AStreamClass
 {
 public:
-    QLabel *label;
     QLabel *label_2;
     QLabel *label_3;
     QPushButton *pushButton;
-    QPushButton *pushButton_2;
-    QPushButton *pushButton_3;
+    QLabel *label;
 
     void setupUi(QWidget *AStreamClass)
     {
         if (AStreamClass->objectName().isEmpty())
             AStreamClass->setObjectName(QStringLiteral("AStreamClass"));
-        AStreamClass->resize(540, 35);
-        label = new QLabel(AStreamClass);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(0, 0, 240, 35));
+        AStreamClass->resize(320, 331);
         label_2 = new QLabel(AStreamClass);
         label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(245, 0, 110, 35));
+        label_2->setGeometry(QRect(10, 99, 290, 61));
         label_3 = new QLabel(AStreamClass);
         label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(370, 0, 50, 35));
+        label_3->setGeometry(QRect(0, 210, 300, 20));
         pushButton = new QPushButton(AStreamClass);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(427, 6, 26, 23));
-        pushButton_2 = new QPushButton(AStreamClass);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(467, 6, 26, 23));
-        pushButton_3 = new QPushButton(AStreamClass);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(507, 6, 26, 23));
+        pushButton->setGeometry(QRect(130, 280, 60, 30));
+        label = new QLabel(AStreamClass);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(100, 40, 64, 64));
 
         retranslateUi(AStreamClass);
 
@@ -62,12 +54,11 @@ public:
     void retranslateUi(QWidget *AStreamClass)
     {
         AStreamClass->setWindowTitle(QApplication::translate("AStreamClass", "AStream", 0));
-        label->setText(QApplication::translate("AStreamClass", "\345\223\252\344\275\215\350\266\205\347\272\247\345\244\247\346\230\216\346\230\237\347\232\204\346\255\214\345\220\215\345\225\212\357\274\214\346\255\214\345\220\215\345\225\212\357\274\214\350\277\231\344\271\210\351\225\277", 0));
-        label_2->setText(QApplication::translate("AStreamClass", "\346\255\214\346\211\213\345\220\215\350\277\231\344\271\210\351\225\277\345\244\237\344\272\206\345\225\212", 0));
-        label_3->setText(QApplication::translate("AStreamClass", "00:00", 0));
+        label_2->setText(QApplication::translate("AStreamClass", "FFmpeg\346\230\257\344\270\200\345\245\227\345\217\257\344\273\245\347\224\250\346\235\245\350\256\260\345\275\225\343\200\201\350\275\254\346\215\242\346\225\260\345\255\227\351\237\263\351\242\221\343\200\201\350\247\206\351\242\221\357\274\214\345\271\266\350\203\275\345\260\206\345\205\266\350\275\254\345\214\226\344\270\272\346\265\201\347\232\204\345\274\200\346\272\220\350\256\241\347\256\227\346\234\272\n"
+"\347\250\213\345\272\217\343\200\202", 0));
+        label_3->setText(QApplication::translate("AStreamClass", "guanfang", 0));
         pushButton->setText(QApplication::translate("AStreamClass", "PushButton", 0));
-        pushButton_2->setText(QApplication::translate("AStreamClass", "PushButton", 0));
-        pushButton_3->setText(QApplication::translate("AStreamClass", "PushButton", 0));
+        label->setText(QApplication::translate("AStreamClass", "TextLabel", 0));
     } // retranslateUi
 
 };

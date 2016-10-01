@@ -52,7 +52,7 @@ aboutPlayerWidget::aboutPlayerWidget(int w, int h, QWidget * parent):tranWidget(
 		promt->setText(set.value("Main/promtWord").toString());
 		email->setText(set.value("Main/emailWord").toString());
 		qq->setText(set.value("Main/qqWord").toString());
-		github->setText(set.value("Main/githubWord").toString());
+		github->setText(u8"ÏîÄ¿µØÖ·£º<a style='color: white;' href =https://github.com/Amber-yy/AStream>https://github.com/Amber-yy/AStream</a>");
 		version->setText(set.value("Main/versionWord").toString());
 		releaseDate->setText(set.value("Main/releaseWord").toString());
 		thanks->setText(set.value("Main/thanksWord").toString());

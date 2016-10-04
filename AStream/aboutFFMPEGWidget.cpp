@@ -14,7 +14,7 @@ aboutFFMPEGWidget::aboutFFMPEGWidget(int w,int h,QWidget *parent):tranWidget(w,h
 		describe=new QLabel(u8"FFmpeg是一套可以用来记录、转换数字音频、视频，\n并能将其转化为流的开源计算机程序。",this);
 		officialWeb=new QLabel(u8"官方网站：<a style='color:white' href=https://ffmpeg.org>https://ffmpeg.org/</a>",this);
 		submit=new QPushButton(u8"确定",this);
-
+		setTitle(u8"关于FFMPEG");
 		ffmpegIcon->setGeometry(128, 50, 64, 64);
 		describe->setGeometry(10, 120, 310, 40);
 		officialWeb->setGeometry(10, 165, 290, 20);

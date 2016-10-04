@@ -1,0 +1,73 @@
+﻿QScrollArea
+{
+	border:0px;
+}
+
+QScrollBar:vertical 
+{              
+    background:transparent;  
+    width:9px;  
+    margin: 0px 0px 2px 0px;  
+}  
+  
+QScrollBar::handle:vertical 
+{	
+    background: rgba(102, 204, 250,0.9);  
+    min-height: 20px;  
+    border-radius: 4px;  
+}  
+  
+QScrollBar::handle:vertical:hover
+{
+    background:rgba(0,0,0,0.3);  
+}  
+  
+QScrollBar::add-line:vertical
+{
+    height: 0px;  
+    subcontrol-position: bottom;  
+    subcontrol-origin: margin;  
+}  
+  
+QScrollBar::sub-line:vertical
+{
+    height: 0px;  
+    subcontrol-position: top;  
+    subcontrol-origin: margin;  
+}  
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical
+{
+    background: none;
+}
+
+QPushButton#closeBt
+{
+	border-image:url("data/icon/closeNormal.png");
+} 
+
+QPushButton#closeBt:hover
+{
+	border-image:url("data/icon/closeHover.png");
+}
+
+QPushButton#closeBt:pressed
+{
+	border-image:url("data/icon/closePress.png");
+}
+
+QPushButton#setBt
+{
+	border-image:url("data/icon/buttonNormal.png");
+} 
+
+QPushButton#setBt:hover
+{
+	border-image:url("data/icon/buttonHover.png");
+}
+
+QPushButton#setBt:pressed
+{
+	border-image:url("data/icon/buttonPress.png");
+}
+

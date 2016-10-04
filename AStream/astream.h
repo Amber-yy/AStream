@@ -29,6 +29,7 @@ class aboutPlayerWidget;
 class aboutKGWidget;
 class aboutLAVWidget;
 class aboutFFMPEGWidget;
+class skinSetter;
 
 class AStream : public QWidget,public QAbstractNativeEventFilter
 {
@@ -51,6 +52,7 @@ public:
 	void setLike(bool);
 	void setVolume(int);
 	void setSkin(QString);
+	void setColor(QColor);
 	void setSongName(QString);
 	void resetProgress();
 	void resetPlayBar();
@@ -91,6 +93,7 @@ protected:
 	virtual bool nativeEventFilter(const QByteArray &, void *, long *)override;
 protected:
 	QPixmap skin;
+	QColor currentColor;
 	QPoint lastPos;
 	QString playBtStyle,likeBtStyle,playModeStyle,soundBtStyle;
 	QString lrcDeskStyle;
@@ -127,6 +130,7 @@ protected:
 	aboutKGWidget *aboutKG;
 	aboutLAVWidget *aboutLAVW;
 	aboutFFMPEGWidget *aboutFFW;
+	skinSetter *skinModifier;
 	playMode currentMode;
 	static const size_t maxSongName=34;
 	size_t maxDuration,playProgress;
@@ -140,6 +144,7 @@ protected:
 	bool isPress;
 	bool isLike;
 	bool isPause;
+	bool isPureColor;
 };
 
 #endif // ASTREAM_H

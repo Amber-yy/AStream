@@ -14,8 +14,8 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QScrollArea>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -23,28 +23,35 @@ QT_BEGIN_NAMESPACE
 class Ui_AStreamClass
 {
 public:
-    QLabel *label_2;
-    QLabel *label_3;
     QPushButton *pushButton;
-    QLabel *label;
+    QPushButton *pushButton_2;
+    QScrollArea *scrollArea;
+    QWidget *scrollAreaWidgetContents;
+    QPushButton *pushButton_3;
 
     void setupUi(QWidget *AStreamClass)
     {
         if (AStreamClass->objectName().isEmpty())
             AStreamClass->setObjectName(QStringLiteral("AStreamClass"));
-        AStreamClass->resize(320, 331);
-        label_2 = new QLabel(AStreamClass);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(10, 99, 290, 61));
-        label_3 = new QLabel(AStreamClass);
-        label_3->setObjectName(QStringLiteral("label_3"));
-        label_3->setGeometry(QRect(0, 210, 300, 20));
+        AStreamClass->resize(522, 315);
         pushButton = new QPushButton(AStreamClass);
         pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(130, 280, 60, 30));
-        label = new QLabel(AStreamClass);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(100, 40, 64, 64));
+        pushButton->setGeometry(QRect(370, 280, 50, 25));
+        pushButton_2 = new QPushButton(AStreamClass);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(440, 280, 75, 25));
+        scrollArea = new QScrollArea(AStreamClass);
+        scrollArea->setObjectName(QStringLiteral("scrollArea"));
+        scrollArea->setGeometry(QRect(0, 30, 522, 240));
+        scrollArea->setStyleSheet(QStringLiteral(""));
+        scrollArea->setWidgetResizable(true);
+        scrollAreaWidgetContents = new QWidget();
+        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 520, 238));
+        scrollArea->setWidget(scrollAreaWidgetContents);
+        pushButton_3 = new QPushButton(AStreamClass);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(499, 0, 23, 18));
 
         retranslateUi(AStreamClass);
 
@@ -54,11 +61,9 @@ public:
     void retranslateUi(QWidget *AStreamClass)
     {
         AStreamClass->setWindowTitle(QApplication::translate("AStreamClass", "AStream", 0));
-        label_2->setText(QApplication::translate("AStreamClass", "FFmpeg\346\230\257\344\270\200\345\245\227\345\217\257\344\273\245\347\224\250\346\235\245\350\256\260\345\275\225\343\200\201\350\275\254\346\215\242\346\225\260\345\255\227\351\237\263\351\242\221\343\200\201\350\247\206\351\242\221\357\274\214\345\271\266\350\203\275\345\260\206\345\205\266\350\275\254\345\214\226\344\270\272\346\265\201\347\232\204\345\274\200\346\272\220\350\256\241\347\256\227\346\234\272\n"
-"\347\250\213\345\272\217\343\200\202", 0));
-        label_3->setText(QApplication::translate("AStreamClass", "guanfang", 0));
-        pushButton->setText(QApplication::translate("AStreamClass", "PushButton", 0));
-        label->setText(QApplication::translate("AStreamClass", "TextLabel", 0));
+        pushButton->setText(QApplication::translate("AStreamClass", "\350\260\203\350\211\262\346\235\277", 0));
+        pushButton_2->setText(QApplication::translate("AStreamClass", "\350\207\252\345\256\232\344\271\211\347\232\256\350\202\244", 0));
+        pushButton_3->setText(QString());
     } // retranslateUi
 
 };

@@ -1,0 +1,39 @@
+﻿QPushButton#closeBt
+{
+	border-image:url("data/icon/closeNormal.png");
+} 
+
+QPushButton#closeBt:hover
+{
+	border-image:url("data/icon/closeHover.png");
+}
+
+QPushButton#closeBt:pressed
+{
+	border-image:url("data/icon/closePress.png");
+}
+
+QPushButton#setBt
+{
+	border-image:url("data/icon/buttonNormal.png");
+} 
+
+QPushButton#setBt:hover
+{
+	border-image:url("data/icon/buttonHover.png");
+}
+
+QPushButton#setBt:pressed
+{
+	border-image:url("data/icon/buttonPress.png");
+}
+
+QLabel#palette
+{
+	border-image:url("data/icon/palette.png");
+}
+
+QLabel#cursor
+{
+	border-image:url("data/icon/cursor.png");
+}

@@ -11,7 +11,12 @@
 #include "aboutKGWidget.h"
 #include "aboutLAVWidget.h"
 #include "aboutFFMPEGWidget.h"
+#include "desktopLyrics.h"
+#include "skinsetter.h"
 
+#include <QScreen>
+#include <QClipBoard>
+#include <QDeskTopWidget>
 #include <QCloseEvent>
 #include <QPushButton>
 #include <QSettings>
@@ -22,14 +27,10 @@
 #include <QMediaPlayer>
 #include <QTimer>
 #include <QTime>
-
-
 #include <QAction>
 #include <QMenu>
 #include <QDropEvent>
 #include <QMimeData>
-
-#include "desktopLyrics.h"
 
 #include <QApplication>
 #include <QCoreApplication>
@@ -41,7 +42,7 @@
 #endif
 
 AStream::AStream(QWidget *parent)
-	: QWidget(parent), keepTrayIcon(true),isMute(false),volume(80),isPress(false),currentMode(orderPlay),isLike(false),isPause(true),isBlock(true),isDeskLrc(true)
+	: QWidget(parent), keepTrayIcon(true),isMute(false),volume(80),isPress(false),currentMode(orderPlay),isLike(false),isPause(true),isBlock(true),isDeskLrc(true),isPureColor(false)
 {
 	try
 	{
@@ -67,7 +68,13 @@ AStream::AStream(QWidget *parent)
 
 AStream::~AStream()
 {
-	UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), shotKey);
+	auto id = reinterpret_cast<HWND>(this->winId());
+	UnregisterHotKey(id, shotKey);
+	UnregisterHotKey(id, prevKey);
+	UnregisterHotKey(id, nextKey);
+	UnregisterHotKey(id, highKey);
+	UnregisterHotKey(id, lowKey);
+	UnregisterHotKey(id, pauseKey);
 }
 
 void AStream::exit()
@@ -349,9 +356,16 @@ void AStream::setSkin(QString route)
 		realHeight = skin.height();
 		realWidth = realHeight*rate(width(), height());
 	}
-
+	isPureColor = false;
 	skin = std::move(skin.copy((skin.width() - realWidth) / 2, (skin.height() - realHeight) / 2, realWidth, realHeight));
-	
+	update();
+}
+
+void AStream::setColor(QColor c)
+{
+	isPureColor = true;
+	currentColor = c;
+	update();
 }
 
 void AStream::setSongName(QString name)
@@ -617,6 +631,7 @@ void AStream::createSubCom()
 	aboutLAVW = new aboutLAVWidget(320, 180, 0);
 	aboutFFW = new aboutFFMPEGWidget(320, 240, 0);
 
+	skinModifier = new skinSetter(522, 315);
 }
 
 void AStream::readConfig()
@@ -770,6 +785,7 @@ void AStream::readConfig()
 	aboutKG->hide();
 	aboutLAVW->hide();
 	aboutFFW->hide();
+	skinModifier->hide();
 
 }
 
@@ -898,6 +914,11 @@ void AStream::connectSignal()
 	connect(aboutLAV, &QAction::triggered, aboutLAVW,&QWidget::show);
 	connect(aboutFF, &QAction::triggered, aboutFFW, &QWidget::show);
 	
+	connect(skinModifier, &skinSetter::pictureSetted, this, &AStream::setSkin);
+	connect(skinModifier, &skinSetter::colorSetted, this, &AStream::setColor);
+
+	connect(skinBt, &QPushButton::clicked, skinModifier, &QWidget::show);
+
 	songSlider->installEventFilter(this);
 	volumeSlider->installEventFilter(this);
 }
@@ -1047,8 +1068,16 @@ bool AStream::eventFilter(QObject *obj, QEvent *e)
 
 void AStream::paintEvent(QPaintEvent *e)
 {
-	QPainter pa(this);
-	pa.drawPixmap(rect(),skin);
+	if (isPureColor)
+	{
+		QPainter pa(this);
+		pa.drawPixmap(rect(), skin);
+	}
+	else
+	{
+		QPainter pa(this);
+		pa.fillRect(rect(), QBrush(currentColor, Qt::SolidPattern));
+	}
 
 	QPainter r(this);
 	r.fillRect(QRect(330, 70, 540, 40), QBrush(QColor(100, 100, 100, 200), Qt::SolidPattern));

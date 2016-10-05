@@ -16,7 +16,7 @@ lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent)
 
 		deskLyrics = std::make_shared<desktopLyrics>(980, 116);
 		deskLyrics->setColor(QColor(102, 204, 250, 1));
-		deskLyrics->setFirstColor(QColor(255, 255, 255));
+		deskLyrics->setFirstColor(QColor(102, 204, 250));
 		deskLyrics->setSecondColor(QColor(100, 250, 100));
 		deskLyrics->setGeometry(193,620,980,116);
 		deskLyrics->show();
@@ -69,6 +69,34 @@ void lyricsWidget::resetLyrics(QVector<lrc>&lrcs)
 void lyricsWidget::updateLyrics(size_t duration)
 {
 	int size = allLyrics.size();
+
+	double sectionLen, currentLen;
+
+	if (currentIndex == 0)
+	{
+		if (duration < allLyrics[0].duration)
+		{
+			currentLen = 0;
+			sectionLen = 1;
+		}
+		else
+		{ 
+			currentLen = static_cast<double>(duration - allLyrics[currentIndex].duration);
+			sectionLen = static_cast<double>(allLyrics[currentIndex + 1].duration - allLyrics[currentIndex].duration);
+		}
+	}
+	else if (currentIndex == size - 1)
+	{
+		currentLen = static_cast<double>(duration - allLyrics[currentIndex].duration);
+		sectionLen= static_cast<double>(maxDuration - allLyrics[currentIndex].duration);
+	}
+	else
+	{
+		currentLen = static_cast<double>(duration - allLyrics[currentIndex].duration);
+		sectionLen = static_cast<double>(allLyrics[currentIndex+1].duration - allLyrics[currentIndex].duration);
+	}
+
+	deskLyrics->resetProgress(currentLen / sectionLen);
 
 	if (size > currentIndex+1&&duration>=allLyrics[currentIndex+1].duration)
 	{
@@ -128,6 +156,11 @@ void lyricsWidget::restartLyrics()
 		fifth->setText(allLyrics[2].lyrics);
 	}
 
+}
+
+void lyricsWidget::setMaxDuration(size_t d)
+{
+	maxDuration = d;
 }
 
 void lyricsWidget::resetProgroess(size_t duration)

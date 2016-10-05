@@ -14,8 +14,13 @@ public:
 	void setLyricsFont(QFont);
 	void setFirstColor(QColor);
 	void setSecondColor(QColor);
+	void resetProgress(double);
 protected:
+	virtual void paintEvent(QPaintEvent *)override;
 	virtual bool event(QEvent *)override;
 private:
-	QLabel *first, *second;
+	QString first, second;
+	QColor firstColor, secondColor;
+	QFont font;
+	double progress;
 };

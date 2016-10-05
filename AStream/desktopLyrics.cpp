@@ -1,28 +1,16 @@
 #include "desktopLyrics.h"
 #include <QLabel>
 #include <QEvent>
+#include <QPainter>
 
 #include <QDebug>
 
-desktopLyrics::desktopLyrics(int w, int h, QWidget *parent):tranWidget(w,h,parent)
+desktopLyrics::desktopLyrics(int w, int h, QWidget *parent):tranWidget(w,h,parent),progress(10)
 {
 	try
 	{
-		first = new QLabel(this);
-		second = new QLabel(this);
-
-		first->setAlignment(Qt::AlignVCenter|Qt::AlignLeft);
-		second->setAlignment(Qt::AlignVCenter|Qt::AlignRight);
-
-		first->setGeometry(0,0,w,h/2);
-		second->setGeometry(0, h/2, w, h / 2);
-
-		QFont t;
-		t.setFamily(u8"ºÚÌå");
-		t.setPointSize(24);
-		
-		first->setFont(t);
-		second->setFont(t);
+		font.setFamily(u8"ºÚÌå");
+		font.setPixelSize(32);
 		showTiltle(false);
 	}
 	catch (std::bad_alloc &)
@@ -38,32 +26,58 @@ desktopLyrics::~desktopLyrics()
 
 void desktopLyrics::setCurrentText(const QString &text)
 {
-	first->setText(text);
+	first = text;
+	update();
 }
 
 void desktopLyrics::setNextText(const QString & text)
 {
-	second->setText(text);
+	second = text;
+	update();
 }
 
 void desktopLyrics::setLyricsFont(QFont f)
 {
-	first->setFont(f);
-	second->setFont(f);
+	font = f;
+	update();
 }
 
 void desktopLyrics::setFirstColor(QColor c)
 {
-	QPalette p;
-	p.setColor(QPalette::WindowText,c);
-	first->setPalette(p);
+	firstColor = c;
+	update();
 }
 
 void desktopLyrics::setSecondColor(QColor c)
 {
-	QPalette p;
-	p.setColor(QPalette::WindowText, c);
-	second->setPalette(p);
+	secondColor = c;
+	update();
+}
+
+void desktopLyrics::resetProgress(double p)
+{
+	progress = p;
+	update();
+}
+
+void desktopLyrics::paintEvent(QPaintEvent *e)
+{
+	QPainter firstPainter(this);
+	firstPainter.setFont(font);
+	firstPainter.setPen(firstColor);
+	firstPainter.drawText(0, 0, 800,58 , Qt::AlignVCenter | Qt::AlignLeft, first);
+
+	QPainter mask(this);
+	mask.setFont(font);
+	mask.setPen(QColor(255, 255, 255));
+	mask.drawText(0, 0, progress*32 *first.length() , 58, Qt::AlignVCenter | Qt::AlignLeft, first);
+
+	QPainter secondPainter(this);
+	secondPainter.setFont(font);
+	secondPainter.setPen(secondColor);
+	secondPainter.drawText(0, 58, 800, 58, Qt::AlignVCenter | Qt::AlignRight, second);
+
+	return tranWidget::paintEvent(e);
 }
 
 bool desktopLyrics::event(QEvent *e)

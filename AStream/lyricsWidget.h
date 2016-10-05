@@ -17,6 +17,7 @@ public:
 	void resetLyrics(QVector<lrc> &);
 	void updateLyrics(size_t);
 	void restartLyrics();
+	void setMaxDuration(size_t);
 	void resetProgroess(size_t);
 	void showDesktop(bool);
 	void setLock(bool);
@@ -29,6 +30,7 @@ protected:
 	QLabel *third;
 	QLabel *fourth;
 	QLabel *fifth;
+	size_t maxDuration;
 	int currentIndex;
 };
 

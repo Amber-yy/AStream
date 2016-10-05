@@ -121,6 +121,7 @@ void AStream::pauseSong(bool b)
 void AStream::playSong(songWidget::songInfo info)
 {
 	isBlock = false;
+	timer->stop();
 	setSongName(info.musicName);
 	tray->setText(info.musicName);
 	lrcProvider->getLrc(info);
@@ -133,7 +134,7 @@ void AStream::playSong(songWidget::songInfo info)
 	{
 		musicProvider->getPlayUrl(info.hashCode);
 	}
-
+	lyricsBar->resetProgroess(0);
 }
 
 bool AStream::getPause()
@@ -459,7 +460,6 @@ void AStream::resetProgress()
 
 	if (playProgress - lastUpdateTime >1000)
 	{
-		//lastUpdateTime =(playProgress/1000)*1000;
 		lastUpdateTime = playProgress;
 		progress->setText(intToString(playProgress/1000) + '/' + intToString(maxDuration/1000));
 		songSlider->setValue(playProgress/1000);
@@ -862,6 +862,7 @@ void AStream::connectSignal()
 		if (!isBlock&&playProgress/1000!=value)
 		{
 			player->setPosition(value * 1000);
+			lyricsBar->resetProgroess(value * 1000);
 			resetLyrics = true;
 		}
 	}
@@ -1018,6 +1019,8 @@ void AStream::playHandle(qint64 duration)
 	lastUpdateTime = 0;
 	player->play();
 	timer->start(50);
+	lyricsBar->resetProgroess(0);
+	lyricsBar->setMaxDuration(maxDuration);
 	resetLyrics = true;
 }
 

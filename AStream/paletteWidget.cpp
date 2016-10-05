@@ -40,7 +40,7 @@ paletteWidget::paletteWidget(int w,int h,QWidget *parent):tranWidget(w,h,parent)
 
 		connect(submit, &QPushButton::clicked, [this]() 
 		{
-			emit colorSetted(palImage->pixelColor(50, 50));
+			emit colorSetted(palImage->pixelColor(cursor->x() -10+ 4, cursor->y() -40+ 4));
 			cursor->setGeometry(259, 137, 8, 8);
 			this->close();
 		}

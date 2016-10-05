@@ -1071,12 +1071,12 @@ void AStream::paintEvent(QPaintEvent *e)
 	if (isPureColor)
 	{
 		QPainter pa(this);
-		pa.drawPixmap(rect(), skin);
+		pa.fillRect(rect(), QBrush(currentColor, Qt::SolidPattern));
 	}
 	else
 	{
 		QPainter pa(this);
-		pa.fillRect(rect(), QBrush(currentColor, Qt::SolidPattern));
+		pa.drawPixmap(rect(), skin);
 	}
 
 	QPainter r(this);

@@ -81,7 +81,7 @@ bool skinSetter::eventFilter(QObject *obj, QEvent *e)
 		if (currentSkin == ptr)
 		{
 			QPainter pa(ptr);
-			pa.drawPixmap(QRect(90, 45, 24, 24), QPixmap("data/icon/currentSkin"));
+			pa.drawPixmap(QRect(90, 45, 24, 24), QPixmap("data/icon/currentSkin.png"));
 		}
 
 		if (hoverWidget==ptr)

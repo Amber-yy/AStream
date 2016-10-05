@@ -69,6 +69,7 @@ void lyricsWidget::resetLyrics(QVector<lrc>&lrcs)
 void lyricsWidget::updateLyrics(size_t duration)
 {
 	int size = allLyrics.size();
+
 	if (size > currentIndex+1&&duration>=allLyrics[currentIndex+1].duration)
 	{
 		if (currentIndex >=0)

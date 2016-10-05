@@ -109,7 +109,7 @@ void AStream::pauseSong(bool b)
 	{
 		playBt->setObjectName("pauseBt");
 		player->play();
-		timer->start(1000);
+		timer->start(50);
 	}
 	playBt->setStyleSheet(playBtStyle);
 	if (tray->getPause() != b)
@@ -166,9 +166,10 @@ void AStream::prevSong()
 	if (currentMode == singleLoop)
 	{
 		player->setPosition(0);
-		playProgress = -1;
+		playProgress = 0;
+		lastUpdateTime = 0;
 		player->play();
-		timer->start(1000);
+		timer->start(50);
 	}
 	else 
 	{
@@ -202,9 +203,10 @@ void AStream::nextSong()
 	{
 		player->setPosition(0);
 		playProgress = 0;
-		player->play();
+		lastUpdateTime = 0;
 		lyricsBar->restartLyrics();
-		timer->start(1000);
+		player->play();
+		timer->start(50);
 	}
 	else if (currentMode == orderPlay)
 	{
@@ -444,7 +446,7 @@ void AStream::resetProgress()
 		return minStr+':'+secStr;
 	};
 
-	playProgress++;
+	playProgress= player->position();
 	if (resetLyrics)
 	{
 		resetLyrics = false;
@@ -455,9 +457,15 @@ void AStream::resetProgress()
 		lyricsBar->updateLyrics(playProgress);
 	}
 
-	progress->setText(intToString(playProgress) + '/' + intToString(maxDuration));
-	songSlider->setValue(playProgress);
-	if (playProgress == maxDuration)
+	if (playProgress - lastUpdateTime >1000)
+	{
+		//lastUpdateTime =(playProgress/1000)*1000;
+		lastUpdateTime = playProgress;
+		progress->setText(intToString(playProgress/1000) + '/' + intToString(maxDuration/1000));
+		songSlider->setValue(playProgress/1000);
+	}
+
+	if (playProgress == maxDuration&&maxDuration!=0)
 	{
 		nextSong();
 	}
@@ -851,10 +859,9 @@ void AStream::connectSignal()
 
 	connect(songSlider, &QSlider::valueChanged, [this](int value)
 	{
-		if (!isBlock&&playProgress!=value)
+		if (!isBlock&&playProgress/1000!=value)
 		{
 			player->setPosition(value * 1000);
-			playProgress = value;
 			resetLyrics = true;
 		}
 	}
@@ -1005,12 +1012,13 @@ void AStream::playHandle(qint64 duration)
 	{
 		tray->setPause(false);
 	}
-	maxDuration = duration / 1000;
-	songSlider->setRange(0, maxDuration);
+	maxDuration = duration;
+	songSlider->setRange(0, maxDuration/1000);
 	playProgress = 0;
+	lastUpdateTime = 0;
 	player->play();
-	resetLyrics = false;
-	timer->start(1000);
+	timer->start(50);
+	resetLyrics = true;
 }
 
 void AStream::downLoadHandle(QString url)

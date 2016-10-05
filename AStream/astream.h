@@ -133,7 +133,7 @@ protected:
 	skinSetter *skinModifier;
 	playMode currentMode;
 	static const size_t maxSongName=34;
-	size_t maxDuration,playProgress;
+	size_t maxDuration,playProgress,lastUpdateTime;
 	int volume;
 	int shotKey,prevKey,nextKey,highKey,lowKey,pauseKey;
 	bool isDeskLrc;

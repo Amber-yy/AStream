@@ -64,9 +64,10 @@ void lrcDecoder::lrcHandle()
 			int second = regexp.cap(0).toInt();
 			regexp.setPattern("\\d{2}(?=\\])");
 			regexp.indexIn(cap);
+			int millisecond = regexp.cap(0).toInt();
 			lrc tempLrc;
 			tempLrc.lyrics = lrcString;
-			tempLrc.duration = minute * 60 + second;
+			tempLrc.duration = minute * 60000 + second * 1000 + millisecond * 10;
 
 			allLyrics.push_front(tempLrc);
 

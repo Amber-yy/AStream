@@ -776,6 +776,8 @@ void AStream::readConfig()
 	shoter->hide();
 	searchResult->setMaxSize(set.value("maxSearchSize").toInt());
 
+	searchBt->setShortcut(Qt::Key_Return);
+
 	aboutPlayer->setText(u8"关于yy播放器");
 	aboutQt->setText(u8"关于Qt");
 	aboutKugou->setText(u8"关于酷狗");

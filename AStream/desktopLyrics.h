@@ -22,5 +22,8 @@ private:
 	QString first, second;
 	QColor firstColor, secondColor;
 	QFont font;
+	QLinearGradient normalGradient1,maskGradient1, normalGradient2, maskGradient2;
 	double progress;
+	int maxPix;
+	bool isUp;
 };

@@ -17,7 +17,7 @@ lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent)
 		deskLyrics = std::make_shared<desktopLyrics>(980, 116);
 		deskLyrics->setColor(QColor(102, 204, 250, 1));
 		deskLyrics->setFirstColor(QColor(102, 204, 250));
-		deskLyrics->setSecondColor(QColor(100, 250, 100));
+		deskLyrics->setSecondColor(QColor(102, 204, 250));
 		deskLyrics->setGeometry(193,620,980,116);
 		deskLyrics->show();
 

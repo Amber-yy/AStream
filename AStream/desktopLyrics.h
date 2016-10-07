@@ -15,6 +15,10 @@ public:
 	void setFirstColor(QColor);
 	void setSecondColor(QColor);
 	void resetProgress(double);
+	int getMaxPix()
+	{
+		return maxPix;
+	}
 protected:
 	virtual void paintEvent(QPaintEvent *)override;
 	virtual bool event(QEvent *)override;
@@ -23,7 +27,9 @@ private:
 	QColor firstColor, secondColor;
 	QFont font;
 	QLinearGradient normalGradient1,maskGradient1, normalGradient2, maskGradient2;
+	QPixmap pix, temp;
 	double progress;
 	int maxPix;
 	bool isUp;
+	bool repaintAll;
 };

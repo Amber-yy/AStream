@@ -23,15 +23,20 @@ public:
 	void setLock(bool);
 	bool getLock();
 protected:
+	virtual void paintEvent(QPaintEvent *)override;
+protected:
 	QVector<lrc> allLyrics;
 	std::shared_ptr<desktopLyrics> deskLyrics;
-	QLabel *first;
-	QLabel *second;
-	QLabel *third;
-	QLabel *fourth;
-	QLabel *fifth;
+	QString first, second, third, fourth, fifth,sixth,seventh;
+	QRect firstRect, secondRect, thirdRect, fourthRect, fifthRect, sixthRect, seventhRect;
+	QFont font;
+	double playProgress;
 	size_t maxDuration;
+	QPoint maskStartPoint;
+	QPixmap pix,temp;
+	int maxPix;
 	int currentIndex;
+	bool repaintAll;
 };
 
 #endif // LYRICSWIDGET_H

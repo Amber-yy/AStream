@@ -1,18 +1,18 @@
 #include "lyricsWidget.h"
 #include <QLabel>
 #include <QSettings>
+#include <QPainter>
+#include <QPaintEvent>
+
 #include <QDebug>
 #include <windows.h>
 
-lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent)
+lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent),playProgress(0),repaintAll(true)
 {
 	try
 	{
-		first = new QLabel(this);
-		second = new QLabel(this);
-		third = new QLabel(this);
-		fourth = new QLabel(this);
-		fifth = new QLabel(this);
+		pix = QPixmap(540,410);
+		pix.fill(Qt::transparent);
 
 		deskLyrics = std::make_shared<desktopLyrics>(980, 116);
 		deskLyrics->setColor(QColor(102, 204, 250, 1));
@@ -21,32 +21,30 @@ lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent)
 		deskLyrics->setGeometry(193,620,980,116);
 		deskLyrics->show();
 
-		first->setAlignment(Qt::AlignCenter);
-		second->setAlignment(Qt::AlignCenter);
-		third->setAlignment(Qt::AlignCenter);
-		fourth->setAlignment(Qt::AlignCenter);
-		fifth->setAlignment(Qt::AlignCenter);
-
 		QSettings setting("data/lyrics.ini", QSettings::IniFormat);
 	
-		auto setGeo = [&setting](QLabel *la,QString key)
+		auto setGeo = [&setting](QRect &la,QString key)
 		{
 			auto list = setting.value("Geometry/"+key).toString();
-			la->setObjectName(key);
 			auto coord=list.split(' ');
-			la->setGeometry(coord[0].toInt(),coord[1].toInt(),coord[2].toInt(),coord[3].toInt());
+			la=QRect(coord[0].toInt(),coord[1].toInt(),coord[2].toInt(),coord[3].toInt());
 		};
 
-		setGeo(first, "first");
-		setGeo(second, "second");
-		setGeo(third, "third");
-		setGeo(fourth, "fourth");
-		setGeo(fifth, "fifth");
+		setGeo(firstRect, "first");
+		setGeo(secondRect, "second");
+		setGeo(thirdRect, "third");
+		setGeo(fourthRect, "fourth");
+		setGeo(fifthRect, "fifth");
+		setGeo(sixthRect, "sixth");
+		setGeo(seventhRect, "seventh");
 
+		font.setFamily(u8"ºÚÌå");
+		font.setPixelSize(22);
+		/*
 		QFile qss("data/qss/lyrics.qss");
 		qss.open(QIODevice::ReadOnly);
 		setStyleSheet(qss.readAll());
-
+		*/
 	}
 	catch(std::bad_alloc &)
 	{
@@ -97,65 +95,108 @@ void lyricsWidget::updateLyrics(size_t duration)
 	}
 
 	deskLyrics->resetProgress(currentLen / sectionLen);
+	playProgress = currentLen / sectionLen;
 
 	if (size > currentIndex+1&&duration>=allLyrics[currentIndex+1].duration)
 	{
-		if (currentIndex >=0)
-		{
-			second->setText(allLyrics[currentIndex].lyrics);
-		}
-		if (currentIndex >=1)
-		{
-			first->setText(allLyrics[currentIndex-1].lyrics);
-		}
+		repaintAll = true;
+		pix.fill(Qt::transparent);
 		currentIndex++;
-		third->setText(allLyrics[currentIndex].lyrics);
+
+		if (currentIndex >=3)
+		{
+			first = allLyrics[currentIndex - 3].lyrics;
+		}
+		if (currentIndex >= 2)
+		{
+			second = allLyrics[currentIndex - 2].lyrics;
+		}
+		if (currentIndex >= 1)
+		{
+			third = allLyrics[currentIndex - 1].lyrics;
+		}
+
+		fourth=allLyrics[currentIndex].lyrics;
+
 		deskLyrics->setCurrentText(allLyrics[currentIndex].lyrics);
 		deskLyrics->setNextText("");
-		fourth->setText("");
-		fifth->setText("");
+
+		auto str = fourth.toStdWString();
+		maxPix = 0;
+		for (auto ch : str)
+		{
+			if (0 <= ch&&ch <= 128)
+			{
+				maxPix += 11;
+			}
+			else
+			{
+				maxPix += 22;
+			}
+		}
+
+		maskStartPoint.setX((width()-maxPix)/2);
+		maskStartPoint.setY(fourthRect.y());
+
+		fifth="";
+		sixth = "";
+		seventh = "";
+
 		if (size > currentIndex + 1)
 		{
-			fourth->setText(allLyrics[currentIndex +1].lyrics);
-			deskLyrics->setNextText(allLyrics[currentIndex + 1].lyrics);
+			fifth=allLyrics[currentIndex + 1].lyrics;
+			deskLyrics->setNextText(fifth);
 		}
 		if (size > currentIndex + 2)
 		{
-			fifth->setText(allLyrics[currentIndex + 2].lyrics);
+			sixth = allLyrics[currentIndex + 2].lyrics;
+		}
+		if (size > currentIndex + 3)
+		{
+			seventh = allLyrics[currentIndex + 3].lyrics;
 		}
 
 	}
+	update();
 }
 
 void lyricsWidget::restartLyrics()
 {
 	currentIndex = 0;
 
-	first->setText("");
-	second->setText("");
-	third->setText("");
-	fourth->setText("");
-	fifth->setText("");
+	first = "";
+	second = "";
+	third = "";
+	fourth = "";
+	fifth = "";
+	sixth = "";
+	seventh = "";
 	deskLyrics->setCurrentText("");
 	deskLyrics->setNextText("");
 
 	if (allLyrics.size() > 0)
 	{
-		third->setText(allLyrics[0].lyrics);
+		fourth=allLyrics[0].lyrics;
 		deskLyrics->setCurrentText(allLyrics[0].lyrics);
 	}
 
 	if (allLyrics.size() > 1)
 	{
-		fourth->setText(allLyrics[1].lyrics);
+		fifth=allLyrics[1].lyrics;
 		deskLyrics->setNextText(allLyrics[1].lyrics);
 	}
 
 	if (allLyrics.size() > 2)
 	{
-		fifth->setText(allLyrics[2].lyrics);
+		sixth=allLyrics[2].lyrics;
 	}
 
+	if (allLyrics.size() > 3)
+	{
+		seventh = allLyrics[2].lyrics;
+	}
+
+	repaintAll = true;
 }
 
 void lyricsWidget::setMaxDuration(size_t d)
@@ -183,60 +224,79 @@ void lyricsWidget::resetProgroess(size_t duration)
 		}
 	}
 
-	first->setText("");
-	second->setText("");
-	third->setText("");
-	fourth->setText("");
-	fifth->setText("");
+	first = "";
+	second = "";
+	third = "";
+	fourth = "";
+	fifth = "";
+	sixth = "";
+	seventh = "";
 	deskLyrics->setCurrentText("");
 	deskLyrics->setNextText("");
 
 	if (currentIndex == -1)
 	{
 		currentIndex = size-1;
-		if (currentIndex > 1)
+
+		if (currentIndex > 3)
 		{
-			second->setText(allLyrics[currentIndex - 1].lyrics);
+			first = allLyrics[currentIndex - 3].lyrics;
 		}
 
 		if (currentIndex > 2)
 		{
-			first->setText(allLyrics[currentIndex - 2].lyrics);
+			second=allLyrics[currentIndex - 2].lyrics;
+		}
+
+		if (currentIndex > 1)
+		{
+			third = allLyrics[currentIndex - 1].lyrics;
 		}
 
 		if (currentIndex>=0)
 		{
-			third->setText(allLyrics[currentIndex].lyrics);
+			fourth=allLyrics[currentIndex].lyrics;
 			deskLyrics->setCurrentText(allLyrics[currentIndex].lyrics);
 		}
+
 		return;
 	}
 
 	if (currentIndex > 1)
 	{
-		second->setText(allLyrics[currentIndex-1].lyrics);
+		third = allLyrics[currentIndex - 1].lyrics;
 	}
 
 	if (currentIndex > 2)
 	{
-		first->setText(allLyrics[currentIndex - 2].lyrics);
+		second=allLyrics[currentIndex-2].lyrics;
+	}
+
+	if (currentIndex > 3)
+	{
+		first=allLyrics[currentIndex - 3].lyrics;
 	}
 
 	if (size- currentIndex> 0)
 	{
-		third->setText(allLyrics[currentIndex].lyrics);
+		fourth=allLyrics[currentIndex].lyrics;
 		deskLyrics->setCurrentText(allLyrics[currentIndex].lyrics);
 	}
 
 	if (size- currentIndex> 1)
 	{
-		fourth->setText(allLyrics[currentIndex+1].lyrics);
+		fifth=allLyrics[currentIndex+1].lyrics;
 		deskLyrics->setNextText(allLyrics[currentIndex+1].lyrics);
 	}
 
 	if (size- currentIndex> 2)
 	{
-		fifth->setText(allLyrics[currentIndex+2].lyrics);
+		sixth=allLyrics[currentIndex+2].lyrics;
+	}
+
+	if (size - currentIndex> 3)
+	{
+		seventh = allLyrics[currentIndex + 3].lyrics;
 	}
 
 }
@@ -261,4 +321,54 @@ void lyricsWidget::setLock(bool b)
 bool lyricsWidget::getLock()
 {
 	return deskLyrics->getLock();
+}
+
+void lyricsWidget::paintEvent(QPaintEvent *e)
+{
+
+	if (repaintAll)
+	{
+		QPainter painter(&pix);
+		painter.setFont(font);
+
+		painter.setPen(QColor(255, 255, 255));
+		painter.drawText(firstRect, Qt::AlignCenter, first);
+
+		painter.setPen(QColor(255, 255, 255));
+		painter.drawText(secondRect, Qt::AlignCenter, second);
+
+		painter.setPen(QColor(255, 255, 255));
+		painter.drawText(thirdRect, Qt::AlignCenter, third);
+
+		painter.setPen(QColor(255, 255, 255));
+		painter.drawText(fourthRect, Qt::AlignCenter, fourth);
+
+		painter.setPen(QColor(255, 255, 255));
+		painter.drawText(fifthRect, Qt::AlignCenter, fifth);
+
+		painter.setPen(QColor(255, 255, 255));
+		painter.drawText(sixthRect, Qt::AlignCenter, sixth);
+
+		painter.setPen(QColor(255, 255, 255));
+		painter.drawText(seventhRect, Qt::AlignCenter, seventh);
+
+		temp = pix;
+		repaintAll = false;
+	}
+	else
+	{
+		temp = pix;
+		QPainter painter(&temp);
+		painter.setFont(font);
+
+		if (playProgress <= 1)
+		{
+			painter.setPen(QColor(0, 255, 255));
+			painter.drawText(maskStartPoint.x(), maskStartPoint.y(), playProgress*maxPix, 56, Qt::AlignVCenter | Qt::AlignLeft, fourth);
+		}
+	}
+
+	QPainter pixDrawer(this);
+	pixDrawer.drawPixmap(0,0,temp);
+
 }

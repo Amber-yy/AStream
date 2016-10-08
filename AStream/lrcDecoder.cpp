@@ -25,7 +25,7 @@ lrcDecoder::~lrcDecoder()
 void lrcDecoder::getLrc(const songWidget::songInfo &info)
 {
 
-	currentRoute = lrcRoute + info.musicName + ".lrc";
+	currentRoute = lrcRoute + info.musicName.split('.')[0] + ".lrc";
 	QFile lrcFile(currentRoute);
 	if (!lrcFile.exists()&&!info.isLocal)
 	{

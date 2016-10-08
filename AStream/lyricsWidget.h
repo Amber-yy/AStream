@@ -33,7 +33,8 @@ protected:
 	double playProgress;
 	size_t maxDuration;
 	QPoint maskStartPoint;
-	QPixmap pix,temp;
+	QPixmap pix,temp,movePix;
+	int moveRest;
 	int maxPix;
 	int currentIndex;
 	bool repaintAll;

@@ -134,7 +134,7 @@ void AStream::playSong(songWidget::songInfo info)
 	{
 		musicProvider->getPlayUrl(info.hashCode);
 	}
-	lyricsBar->resetProgroess(0);
+
 }
 
 bool AStream::getPause()

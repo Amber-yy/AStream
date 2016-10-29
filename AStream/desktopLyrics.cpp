@@ -66,11 +66,11 @@ void desktopLyrics::setCurrentText(const QString &text)
 	{
 		if (0 <= ch&&ch <= 128)
 		{
-			maxPix += 16;
+			maxPix += font.pixelSize()/2;
 		}
 		else
 		{
-			maxPix += 32;
+			maxPix += font.pixelSize();
 		}
 	}
 

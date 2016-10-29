@@ -105,7 +105,7 @@ void lyricsWidget::updateLyrics(size_t duration)
 	playProgress = currentLen / sectionLen;
 
 	auto str = fourth.toStdWString();
-	maxPix = deskLyrics->getMaxPix()*11;
+	maxPix = deskLyrics->getMaxPix()*font.pixelSize();
 	maskStartPoint.setX((width() - maxPix) / 2);
 	
 	if (size > currentIndex+1&&duration>=allLyrics[currentIndex+1].duration)

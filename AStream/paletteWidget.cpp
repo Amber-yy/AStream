@@ -35,8 +35,8 @@ paletteWidget::paletteWidget(int w,int h,QWidget *parent):tranWidget(w,h,parent)
 			setStyleSheet(qss.readAll());
 		}
 
-		connect(closeBt, &QPushButton::clicked, this, &QWidget::close);
-		connect(cancel, &QPushButton::clicked, this, &QWidget::close);
+		connect(closeBt, &QPushButton::clicked, this, [this]() {emit closed(); close(); });
+		connect(cancel, &QPushButton::clicked, this, [this]() {emit closed(); close(); });
 
 		connect(submit, &QPushButton::clicked, [this]() 
 		{

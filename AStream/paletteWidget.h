@@ -13,6 +13,7 @@ public:
 	virtual void mousePressEvent(QMouseEvent *)override;
 	virtual void mouseMoveEvent(QMouseEvent *)override;
 signals:
+	void closed();
 	void colorSetted(QColor);
 protected:
 	QPushButton *submit;

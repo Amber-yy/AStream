@@ -37,6 +37,11 @@ QString kuGouAPI::playLinkHandle(QNetworkReply *reply)
 
 QVector<musicAPI::musicInfo> kuGouAPI::infoHandle(QNetworkReply *reply)
 {
+	if (!reply->isOpen())
+	{
+		reply->open(QIODevice::ReadOnly);
+	}
+
 	QByteArray json = reply->readAll();
 	int size;
 	json.chop(1);

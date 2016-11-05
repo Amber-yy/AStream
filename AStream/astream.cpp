@@ -1121,11 +1121,11 @@ void AStream::mouseMoveEvent(QMouseEvent *event)
 void AStream::closeEvent(QCloseEvent * e)
 {
 
-	/*if (keepTrayIcon)
+	if (keepTrayIcon)
 	{
 		this->hide();
 		e->ignore();
-	}*/
+	}
 	/*
 #ifdef _WIN32
 	int w = width();

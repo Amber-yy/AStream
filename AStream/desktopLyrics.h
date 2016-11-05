@@ -17,7 +17,7 @@ public:
 	void resetProgress(double);
 	int getMaxPix()
 	{
-		return maxPix/font.pixelSize();
+		return maxPix/(font.pixelSize()/2);
 	}
 protected:
 	virtual void paintEvent(QPaintEvent *)override;

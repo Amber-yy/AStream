@@ -94,4 +94,5 @@ void musicAPI::getAllInfo(const QString &keyWords, size_t maxNum)
 	QString url = searchHead + keyWords + searchMid + QString::number(maxNum) + searchEnd;
 	netRequest->setUrl(QUrl(url));
 	re=netManager->get(*netRequest);
+	
 }

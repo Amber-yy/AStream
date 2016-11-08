@@ -17,29 +17,29 @@ desktopLyrics::desktopLyrics(int w, int h, QWidget *parent):tranWidget(w,h,paren
 		pix = QPixmap(980, 116);
 		pix.fill(Qt::transparent);
 
-		normalGradient1.setStart(0,9);
-		normalGradient1.setFinalStop(0, 41);
-		normalGradient1.setColorAt(0, QColor(0, 51, 153));
+		normalGradient1.setStart(0,0);
+		normalGradient1.setFinalStop(0, 58);
+		normalGradient1.setColorAt(0.2, QColor(0, 51, 153));
+		normalGradient1.setColorAt(0.5, QColor(80, 170, 250));
 		normalGradient1.setColorAt(0.8, QColor(0, 102, 255));
-		normalGradient1.setColorAt(1, QColor(80, 170, 250));
 
-		normalGradient2.setStart(0, 67);
-		normalGradient2.setFinalStop(0, 99);
-		normalGradient2.setColorAt(0, QColor(0, 51, 153));
+		normalGradient2.setStart(0, 58);
+		normalGradient2.setFinalStop(0, 116);
+		normalGradient2.setColorAt(0.2, QColor(0, 51, 153));
+		normalGradient2.setColorAt(0.5, QColor(80, 170, 250));
 		normalGradient2.setColorAt(0.8, QColor(0, 102, 255));
-		normalGradient2.setColorAt(1, QColor(80, 170, 250));
 
 		maskGradient1.setStart(0, 0);
-		maskGradient1.setFinalStop(0, 50);
-		maskGradient1.setColorAt(0, QColor(102,204,250));
+		maskGradient1.setFinalStop(0, 58);
+		maskGradient1.setColorAt(0.2, QColor(102,204,250));
 		maskGradient1.setColorAt(0.5, QColor(255, 255, 255));
-		maskGradient1.setColorAt(1, QColor(102,204,250));
+		maskGradient1.setColorAt(0.8, QColor(102,204,250));
 
 		maskGradient2.setStart(0, 58);
-		maskGradient2.setFinalStop(0, 108);
-		maskGradient2.setColorAt(0, QColor(102, 204, 250));
+		maskGradient2.setFinalStop(0, 116);
+		maskGradient2.setColorAt(0.2, QColor(102, 204, 250));
 		maskGradient2.setColorAt(0.5, QColor(255, 255, 255));
-		maskGradient2.setColorAt(1, QColor(102, 204, 250));
+		maskGradient2.setColorAt(0.8, QColor(102, 204, 250));
 	}
 	catch (std::bad_alloc &)
 	{

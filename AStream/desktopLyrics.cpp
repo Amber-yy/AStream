@@ -19,27 +19,16 @@ desktopLyrics::desktopLyrics(int w, int h, QWidget *parent):tranWidget(w,h,paren
 
 		normalGradient1.setStart(0,0);
 		normalGradient1.setFinalStop(0, 58);
-		normalGradient1.setColorAt(0.2, QColor(0, 51, 153));
-		normalGradient1.setColorAt(0.5, QColor(80, 170, 250));
-		normalGradient1.setColorAt(0.8, QColor(0, 102, 255));
 
 		normalGradient2.setStart(0, 58);
 		normalGradient2.setFinalStop(0, 116);
-		normalGradient2.setColorAt(0.2, QColor(0, 51, 153));
-		normalGradient2.setColorAt(0.5, QColor(80, 170, 250));
-		normalGradient2.setColorAt(0.8, QColor(0, 102, 255));
 
 		maskGradient1.setStart(0, 0);
 		maskGradient1.setFinalStop(0, 58);
-		maskGradient1.setColorAt(0.2, QColor(102,204,250));
-		maskGradient1.setColorAt(0.5, QColor(255, 255, 255));
-		maskGradient1.setColorAt(0.8, QColor(102,204,250));
 
 		maskGradient2.setStart(0, 58);
 		maskGradient2.setFinalStop(0, 116);
-		maskGradient2.setColorAt(0.2, QColor(102, 204, 250));
-		maskGradient2.setColorAt(0.5, QColor(255, 255, 255));
-		maskGradient2.setColorAt(0.8, QColor(102, 204, 250));
+
 	}
 	catch (std::bad_alloc &)
 	{
@@ -83,28 +72,58 @@ void desktopLyrics::setNextText(const QString & text)
 	update();
 }
 
-void desktopLyrics::setLyricsFont(QFont f)
-{
-	font = f;
-	update();
-}
-
-void desktopLyrics::setFirstColor(QColor c)
-{
-	firstColor = c;
-	update();
-}
-
-void desktopLyrics::setSecondColor(QColor c)
-{
-	secondColor = c;
-	update();
-}
-
 void desktopLyrics::resetProgress(double p)
 {
 	progress = p;
 	update();
+}
+
+void desktopLyrics::setFontStyle(int flag)
+{
+
+	if (flag == 0)
+	{
+		font.setBold(false);
+		font.setItalic(false);
+	}
+	else if (flag == 1)
+	{
+		font.setBold(true);
+		font.setItalic(false);
+	}
+	else if (flag == 2)
+	{
+		font.setBold(false);
+		font.setItalic(true);
+	}
+	else if (flag == 3)
+	{
+		font.setBold(true);
+		font.setItalic(true);
+	}
+
+}
+
+void desktopLyrics::setUnplayColor(QColor *c)
+{
+	normalGradient1.setColorAt(0.2, c[0]);
+	normalGradient1.setColorAt(0.5, c[1]);
+	normalGradient1.setColorAt(0.8, c[2]);
+
+	normalGradient2.setColorAt(0.2, c[0]);
+	normalGradient2.setColorAt(0.5, c[1]);
+	normalGradient2.setColorAt(0.8, c[2]);
+}
+
+void desktopLyrics::setPlayedColor(QColor *c)
+{
+	maskGradient1.setColorAt(0.2, c[0]);
+	maskGradient1.setColorAt(0.5, c[1]);
+	maskGradient1.setColorAt(0.8, c[2]);
+
+	maskGradient2.setColorAt(0.2, c[0]);
+	maskGradient2.setColorAt(0.5, c[1]);
+	maskGradient2.setColorAt(0.8, c[2]);
 }
 
 void desktopLyrics::paintEvent(QPaintEvent *e)

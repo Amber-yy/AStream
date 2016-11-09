@@ -11,10 +11,18 @@ public:
 	virtual ~desktopLyrics();
 	void setCurrentText(const QString &);
 	void setNextText(const QString &);
-	void setLyricsFont(QFont);
-	void setFirstColor(QColor);
-	void setSecondColor(QColor);
 	void resetProgress(double);
+	void setFontName(QString &name)
+	{
+		font.setFamily(name);
+	}
+	void setFontSize(int s)
+	{
+		font.setPixelSize(s);
+	}
+	void setFontStyle(int);
+	void setUnplayColor(QColor *);
+	void setPlayedColor(QColor *);
 	int getMaxPix()
 	{
 		return maxPix/(font.pixelSize()/2);

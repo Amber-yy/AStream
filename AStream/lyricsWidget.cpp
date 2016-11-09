@@ -16,8 +16,6 @@ lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent),playProgress(0),repa
 
 		deskLyrics = std::make_shared<desktopLyrics>(980, 116);
 		deskLyrics->setColor(QColor(102, 204, 250, 1));
-		deskLyrics->setFirstColor(QColor(102, 204, 250));
-		deskLyrics->setSecondColor(QColor(102, 204, 250));
 		deskLyrics->setGeometry(193,620,980,116);
 		deskLyrics->show();
 
@@ -41,11 +39,7 @@ lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent),playProgress(0),repa
 		font.setFamily(u8"ºÚÌå");
 		font.setPixelSize(22);
 		maskStartPoint.setY(fourthRect.y());
-		/*
-		QFile qss("data/qss/lyrics.qss");
-		qss.open(QIODevice::ReadOnly);
-		setStyleSheet(qss.readAll());
-		*/
+
 	}
 	catch(std::bad_alloc &)
 	{
@@ -317,6 +311,32 @@ bool lyricsWidget::getLock()
 	return deskLyrics->getLock();
 }
 
+void lyricsWidget::setFontStyle(int flag)
+{
+
+	if (flag == 0)
+	{
+		font.setBold(false);
+		font.setItalic(false);
+	}
+	else if (flag == 1)
+	{
+		font.setBold(true);
+		font.setItalic(false);
+	}
+	else if (flag == 2)
+	{
+		font.setBold(false);
+		font.setItalic(true);
+	}
+	else if (flag == 3)
+	{
+		font.setBold(true);
+		font.setItalic(true);
+	}
+
+}
+
 void lyricsWidget::paintEvent(QPaintEvent *e)
 {
 
@@ -325,25 +345,25 @@ void lyricsWidget::paintEvent(QPaintEvent *e)
 		QPainter painter(&pix);
 		painter.setFont(font);
 
-		painter.setPen(QColor(255, 255, 255));
+		painter.setPen(unplay);
 		painter.drawText(firstRect, Qt::AlignCenter, first);
 
-		painter.setPen(QColor(255, 255, 255));
+		painter.setPen(unplay);
 		painter.drawText(secondRect, Qt::AlignCenter, second);
 
-		painter.setPen(QColor(255, 255, 255));
+		painter.setPen(unplay);
 		painter.drawText(thirdRect, Qt::AlignCenter, third);
 
-		painter.setPen(QColor(255, 255, 255));
+		painter.setPen(unplay);
 		painter.drawText(fourthRect, Qt::AlignCenter, fourth);
 
-		painter.setPen(QColor(255, 255, 255));
+		painter.setPen(unplay);
 		painter.drawText(fifthRect, Qt::AlignCenter, fifth);
 
-		painter.setPen(QColor(255, 255, 255));
+		painter.setPen(unplay);
 		painter.drawText(sixthRect, Qt::AlignCenter, sixth);
 
-		painter.setPen(QColor(255, 255, 255));
+		painter.setPen(unplay);
 		painter.drawText(seventhRect, Qt::AlignCenter, seventh);
 
 		temp = pix;
@@ -359,7 +379,7 @@ void lyricsWidget::paintEvent(QPaintEvent *e)
 
 		if (playProgress <= 1)
 		{
-			painter.setPen(QColor(251,219,131));
+			painter.setPen(played);
 			painter.drawText(maskStartPoint.x(), maskStartPoint.y(), playProgress*maxPix, 56, Qt::AlignVCenter | Qt::AlignLeft, fourth);
 		}
 	}

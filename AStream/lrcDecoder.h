@@ -25,6 +25,10 @@ public:
 	~lrcDecoder();
 	void getLrc(const songWidget::songInfo &);
 	void lrcHandle();
+	void setRoute(QString lrc)
+	{
+		lrcRoute = lrc;
+	}
 signals:
 	void decodeFinished(QVector<lrc> &);
 protected:

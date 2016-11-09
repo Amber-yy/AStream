@@ -22,6 +22,43 @@ public:
 	void showDesktop(bool);
 	void setLock(bool);
 	bool getLock();
+	void setFontName(QString &name)
+	{
+		font.setFamily(name);
+	}
+	void setFontSize(int s)
+	{
+		font.setPixelSize(s);
+	}
+	void setUnplay(QColor c)
+	{
+		unplay = c;
+	}
+	void setPlayed(QColor c)
+	{
+		played = c;
+	}
+	void setDeskFontName(QString &name)
+	{
+		deskLyrics->setFontName(name);
+	}
+	void setDeskFontSize(int s)
+	{
+		deskLyrics->setFontSize(s);
+	}
+	void setDeskFontStyle(int flag)
+	{
+		deskLyrics->setFontStyle(flag);
+	}
+	void setDeskPlayedColor(QColor *c)
+	{
+		deskLyrics->setPlayedColor(c);
+	}
+	void setDeskUnplayColor(QColor *c)
+	{
+		deskLyrics->setUnplayColor(c);
+	}
+	void setFontStyle(int);
 protected:
 	virtual void paintEvent(QPaintEvent *)override;
 protected:
@@ -30,6 +67,8 @@ protected:
 	QString first, second, third, fourth, fifth,sixth,seventh;
 	QRect firstRect, secondRect, thirdRect, fourthRect, fifthRect, sixthRect, seventhRect;
 	QFont font;
+	QColor unplay;
+	QColor played;
 	double playProgress;
 	size_t maxDuration;
 	QPoint maskStartPoint;

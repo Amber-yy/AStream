@@ -13,6 +13,7 @@
 #include "aboutFFMPEGWidget.h"
 #include "desktopLyrics.h"
 #include "skinsetter.h"
+#include "setwidget.h"
 
 #include <QScreen>
 #include <QClipBoard>
@@ -31,6 +32,7 @@
 #include <QMenu>
 #include <QDropEvent>
 #include <QMimeData>
+#include <QNetworkProxy>
 
 #include <QApplication>
 #include <QCoreApplication>
@@ -640,13 +642,14 @@ void AStream::createSubCom()
 	aboutFFW = new aboutFFMPEGWidget(320, 240, 0);
 
 	skinModifier = new skinSetter(522, 315);
+	setter = new setWidget(600, 430);
+	setter->hide();
 }
 
 void AStream::readConfig()
 {
 	/*¶ÁÈ¡ÅäÖÃ*/
 	QSettings set("data/mainPlayer.ini", QSettings::IniFormat);
-	downLoadRoute = set.value("downLoadRoute").toString();
 	setWindowTitle(set.value("windowTitle").toString());
 	QString style;
 	QFile qss(set.value("qssRoute").toString());
@@ -928,6 +931,12 @@ void AStream::connectSignal()
 	connect(skinModifier, &skinSetter::colorSetted, this, &AStream::setColor);
 
 	connect(skinBt, &QPushButton::clicked, skinModifier, &QWidget::show);
+	connect(setBt, &QPushButton::clicked, setter, &QWidget::show);
+
+	connect(setter, &setWidget::resetGeneral, this, &AStream::setGeneral);
+	connect(setter, &setWidget::resetWindowLrc, this, &AStream::setWindowLrc);
+	connect(setter, &setWidget::resetDeskLrc, this, &AStream::setDeskLrc);
+	connect(setter, &setWidget::resetNetwork, this, &AStream::setProxy);
 
 	songSlider->installEventFilter(this);
 	volumeSlider->installEventFilter(this);
@@ -1211,4 +1220,54 @@ bool AStream::nativeEventFilter(const QByteArray &eventType, void *message, long
 	}
 
 	return false;
+}
+
+void AStream::setGeneral(generalSet &gen)
+{
+
+	isAutoPlay = gen.autoPlay;
+	playHello = gen.playHello;
+	keepTrayIcon = gen.keepIcon;
+	lrcProvider->setRoute(gen.lrcRoute);
+	downLoadRoute = gen.downLoadRoute;
+	shoter->setAutoSave(gen.autoSave);
+	shoter->setFileRoute(gen.saveRoute);
+
+}
+
+void AStream::setWindowLrc(windowLrc &win)
+{
+
+	lyricsBar->setFontName(win.fontName);
+	lyricsBar->setFontSize(win.pixelSize);
+	lyricsBar->setUnplay(win.unPlay);
+	lyricsBar->setPlayed(win.played);
+	lyricsBar->setFontStyle(win.type);
+
+}
+
+void AStream::setDeskLrc(deskLrc &lrc)
+{
+
+	lyricsBar->setDeskFontName(lrc.fontName);
+	lyricsBar->setDeskUnplayColor(lrc.unPlay);
+	lyricsBar->setDeskPlayedColor(lrc.played);
+	lyricsBar->setDeskFontStyle(lrc.type);
+	lyricsBar->setDeskFontSize(lrc.pixelSize);
+
+}
+
+void AStream::setProxy(networkSet &net)
+{
+	QNetworkProxy proxy;
+	proxy.setType(static_cast<QNetworkProxy::ProxyType>(net.proxyType));
+	proxy.setHostName(net.address);
+	proxy.setPort(net.port.toInt());
+	proxy.setUser(net.userName);
+	proxy.setPassword(net.passWord);
+
+	musicProvider->setProxy(proxy);
+	musicDownLoader->setProxy(proxy);
+
+	searchResult->setMaxSize(net.resultNum);
 }

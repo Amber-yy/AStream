@@ -7,6 +7,7 @@
 #include <QAbstractNativeEventFilter>
 #include <random>
 #include "songWidget.h"
+#include "setStructs.h"
 
 #include <stdio.h>
 
@@ -30,6 +31,7 @@ class aboutKGWidget;
 class aboutLAVWidget;
 class aboutFFMPEGWidget;
 class skinSetter;
+class setWidget;
 
 class AStream : public QWidget,public QAbstractNativeEventFilter
 {
@@ -91,6 +93,10 @@ protected:
 	virtual void dragEnterEvent(QDragEnterEvent *)override;
 	virtual void dropEvent(QDropEvent *)override;
 	virtual bool nativeEventFilter(const QByteArray &, void *, long *)override;
+	void setGeneral(generalSet &);
+	void setWindowLrc(windowLrc &);
+	void setDeskLrc(deskLrc &);
+	void setProxy(networkSet &);
 protected:
 	QPixmap skin;
 	QColor currentColor;
@@ -117,6 +123,7 @@ protected:
 	searchList *searchResult;
 	screenShoter *shoter;
 	lyricsWidget *lyricsBar;
+	setWidget *setter;
 	QLabel *songName, *progress,*playerIcon;
 	QSlider *songSlider, *volumeSlider;
 	musicAPI *musicDownLoader,*musicProvider;
@@ -145,6 +152,8 @@ protected:
 	bool isLike;
 	bool isPause;
 	bool isPureColor;
+	bool isAutoPlay;
+	bool playHello;
 };
 
 #endif // ASTREAM_H

@@ -96,3 +96,8 @@ void musicAPI::getAllInfo(const QString &keyWords, size_t maxNum)
 	re=netManager->get(*netRequest);
 	
 }
+
+void musicAPI::setProxy(QNetworkProxy & t)
+{
+	netManager->setProxy(t);
+}

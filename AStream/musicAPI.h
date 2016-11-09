@@ -9,6 +9,8 @@ class QNetworkReply;
 class QNetworkAccessManager;
 class QNetworkRequest;
 
+#include <QNetworkProxy>
+
 class musicAPI :public QObject
 {
 	Q_OBJECT
@@ -35,6 +37,7 @@ public:
 	virtual void getPlayUrl(const QString&) final;
 	virtual void getAllInfo(const QString &, size_t) final;
 	virtual QString lrcUrlConnect(const QString &);
+	virtual void setProxy(QNetworkProxy &t);
 signals:
 	void infoGetted(QVector<musicInfo>);
 	void downLoadFinished();

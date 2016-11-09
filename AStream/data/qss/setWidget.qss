@@ -1,0 +1,225 @@
+﻿
+QCheckBox::indicator:unchecked 
+{
+	image: url("data/icon/checkNormal.png");
+}
+
+QCheckBox::indicator:unchecked:hover 
+{
+	image: url("data/icon/checkHover.png");
+}
+
+QCheckBox::indicator:unchecked:pressed 
+{
+	image: url("data/icon/checkPress.png");
+}
+
+QCheckBox::indicator:checked 
+{
+	image: url("data/icon/checkedNormal.png");
+}
+
+QCheckBox::indicator:checked:hover 
+{
+	image: url("data/icon/checkedHover.png");
+}
+
+QCheckBox::indicator:checked:pressed 
+{
+	image: url("data/icon/checkedPress.png");
+}
+
+QRadioButton::indicator::unchecked 
+{
+    image: url("data/icon/radioNormal.png");
+}
+
+QRadioButton::indicator:unchecked:hover
+{
+    image: url("data/icon/radioHover.png");
+}
+
+QRadioButton::indicator::unchecked:pressed
+{
+    image: url("data/icon/radioPress.png");
+}
+
+QRadioButton::indicator::checked 
+{
+    image: url("data/icon/radioedNormal.png");
+}
+
+QRadioButton::indicator:checked:hover
+{
+    image: url("data/icon/radioedHover.png");
+}
+
+QRadioButton::indicator::checked:pressed
+{
+    image: url("data/icon/radioedPress.png");
+}
+
+QPushButton#hotkeySetBt
+{
+	border-image:url("data/icon/hotkeyNormal.png");
+} 
+
+QPushButton#hotkeySetBt:hover
+{
+	border-image:url("data/icon/hotkeyHover.png");
+}
+
+QPushButton#hotkeySetBt:pressed
+{
+	border-image:url("data/icon/hotkeyPress.png");
+}
+
+QPushButton#closeBt
+{
+	border-image:url("data/icon/closeNormal.png");
+} 
+
+QPushButton#closeBt:hover
+{
+	border-image:url("data/icon/closeHover.png");
+}
+
+QPushButton#closeBt:pressed
+{
+	border-image:url("data/icon/closePress.png");
+}
+
+QPushButton#generalSetBt
+{
+	border-image:url("data/icon/generalNormal.png");
+} 
+
+QPushButton#generalSetBt:hover
+{
+	border-image:url("data/icon/generalHover.png");
+}
+
+QPushButton#generalSetBt:pressed
+{
+	border-image:url("data/icon/generalPress.png");
+}
+
+QPushButton#windowLrcBt
+{
+	border-image:url("data/icon/windowLrcNormal.png");
+} 
+
+QPushButton#windowLrcBt:hover
+{
+	border-image:url("data/icon/windowLrcHover.png");
+}
+
+QPushButton#windowLrcBt:pressed
+{
+	border-image:url("data/icon/windowLrcPress.png");
+}
+
+QPushButton#desktopLrcBt
+{
+	border-image:url("data/icon/desktopLrcNormal.png");
+} 
+
+QPushButton#desktopLrcBt:hover
+{
+	border-image:url("data/icon/desktopLrcHover.png");
+}
+
+QPushButton#desktopLrcBt:pressed
+{
+	border-image:url("data/icon/desktopLrcPress.png");
+}
+
+QPushButton#proxySetBt
+{
+	border-image:url("data/icon/proxyNormal.png");
+} 
+
+QPushButton#proxySetBt:hover
+{
+	border-image:url("data/icon/proxyHover.png");
+}
+
+QPushButton#proxySetBt:pressed
+{
+	border-image:url("data/icon/proxyPress.png");
+}
+
+QLabel#basicSetLa
+{
+	border-image:url("data/icon/basicSet.png");
+}
+
+QLabel#lrcSetLa
+{
+	border-image:url("data/icon/lrcSet.png");
+}
+
+QLabel#advanceSetLa
+{
+	border-image:url("data/icon/advanceSet.png");
+}
+
+QPushButton
+{
+	border-image:url("data/icon/buttonNormal.png");
+} 
+
+QPushButton:hover
+{
+	border-image:url("data/icon/buttonHover.png");
+}
+
+QPushButton:pressed
+{
+	border-image:url("data/icon/buttonPress.png");
+}
+
+QComboBox 
+{
+    border: 1px solid gray;
+    border-radius: 3px;
+}
+
+QComboBox:hover
+{
+    border: 1px solid blue;
+    border-radius: 3px;
+}
+
+QComboBox:editable 
+{
+    background: white;
+}
+
+QComboBox:!editable, QComboBox::drop-down:editable 
+{
+     background: white
+}
+
+QComboBox:!editable:on, QComboBox::drop-down:editable:on 
+{
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                  stop: 0 #D3D3D3, stop: 0.4 #D8D8D8,
+                                  stop: 0.5 #DDDDDD, stop: 1.0 #E1E1E1);
+}
+
+QComboBox::drop-down 
+{
+    subcontrol-origin: padding;
+    subcontrol-position: top right;
+    border-left-width: 1px;
+    border-left-color: darkgray;
+    border-left-style: solid; 
+    border-top-right-radius: 3px; 
+    border-bottom-right-radius: 3px;
+}
+
+QComboBox::down-arrow
+{
+    border-image: url("data/icon/arrow.png");
+}

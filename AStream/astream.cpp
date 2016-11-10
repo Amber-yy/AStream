@@ -837,7 +837,6 @@ void AStream::setSubObjectName()
 	lyricsBt->setObjectName("lyricsBt");
 	lyricsBar->setObjectName("lyricsBar");
 
-
 }
 
 void AStream::connectSignal()

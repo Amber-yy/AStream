@@ -370,6 +370,7 @@ void lyricsWidget::paintEvent(QPaintEvent *e)
 		moveRest = 56;
 
 		QPainter tempPainter(&temp);
+		tempPainter.setFont(font);
 		tempPainter.setPen(unplay);
 		tempPainter.drawText(fourthRect, Qt::AlignCenter, fourth);
 		repaintAll = false;
@@ -385,17 +386,23 @@ void lyricsWidget::paintEvent(QPaintEvent *e)
 			movePix.fill(Qt::transparent);
 			painter.setFont(font);
 			painter.setPen(unplay);
-			painter.drawText(0, 0,560, 56, Qt::AlignVCenter | Qt::AlignLeft, fourth);
+			painter.drawText(0,0,540,56,Qt::AlignVCenter | Qt::AlignLeft, fourth);
 			painter.setPen(played);
 			painter.drawText(0,0, playProgress*maxPix, 56, Qt::AlignVCenter | Qt::AlignLeft, fourth);
 			QPainter tempPainter(&temp);
-			tempPainter.drawPixmap((540-maxPix)/2,56*3,movePix);
+			tempPainter.drawPixmap((540-maxPix)/2,177,movePix);
+		}
+		else
+		{
+			QPainter tempPainter(&temp);
+			tempPainter.setFont(font);
+			tempPainter.setPen(unplay);
+			tempPainter.drawText(fourthRect, Qt::AlignCenter, fourth);
 		}
 	}
 
 	if (moveRest <= 0)
 	{
-		moveRest = 0;
 		QPainter pixDrawer(this);
 		pixDrawer.drawPixmap(0, 0, temp);
 	}

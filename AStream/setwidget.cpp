@@ -38,6 +38,15 @@ setWidget::setWidget(int w, int h, QWidget *parent) : tranWidget(w, h, parent), 
 
 }
 
+void setWidget::getSet()
+{
+	emit resetGeneral(general);
+	emit resetHotKey(hotkeys);
+	emit resetWindowLrc(windowlrc);
+	emit resetDeskLrc(desklrc);
+	emit resetNetwork(network);
+}
+
 setWidget::~setWidget()
 {
 	//saveGeneral();
@@ -516,10 +525,10 @@ void setWidget::readConfig()
 
 	passwordEdit->setEchoMode(QLineEdit::Password);
 
-	//readGeneral();
-	//readHotKey();
-	//readWindowLrc();
+	readWindowLrc();
 	readDeskLrc();
+	readGeneral();
+	readHotKey();
 	readNetwork();
 }
 
@@ -562,7 +571,6 @@ void setWidget::readHotKey()
 	allKeys.insert(0x5b, "[");
 	allKeys.insert(0x5d, "]");
 	allKeys.insert(0x60, "`");
-	allKeys.insert(0x3b, ";");
 	allKeys.insert(0x3b, ";");
 	allKeys.insert(0x27, "'");
 	allKeys.insert(0x5c, "\\");
@@ -642,7 +650,8 @@ void setWidget::readWindowLrc()
 {
 	QSettings gs("data/setWidget.ini", QSettings::IniFormat);
 
-	windowlrc.fontName = gs.value("WindowLrc/winFontName").toString();
+	windowlrc.fontName = fontBox->itemText(gs.value("WindowLrc/winFontName").toInt());
+
 	windowlrc.type = static_cast<windowLrc::fontType>(gs.value("WindowLrc/winFontType").toString().toInt());
 	windowlrc.pixelSize = gs.value("WindowLrc/winPixelSize").toString().toInt();
 
@@ -666,7 +675,7 @@ void setWidget::readDeskLrc()
 {
 	QSettings gs("data/setWidget.ini", QSettings::IniFormat);
 
-	desklrc.fontName = gs.value("DeskLrc/deFontName").toString();
+	desklrc.fontName =  fontBox->itemText(gs.value("DeskLrc/deFontName").toInt());
 	desklrc.type = static_cast<windowLrc::fontType>(gs.value("DeskLrc/deFontType").toString().toInt());
 	desklrc.pixelSize = gs.value("DeskLrc/dePixelSize").toString().toInt();
 
@@ -724,7 +733,7 @@ void setWidget::saveWindowLrc()
 {
 	QSettings gs("data/setWidget.ini", QSettings::IniFormat);
 
-	gs.setValue("WindowLrc/winFontName", windowlrc.fontName);
+	gs.setValue("WindowLrc/winFontName", QString::number(fontBox->findText(windowlrc.fontName)));
 	gs.setValue("WindowLrc/winUnplayColor", QString::number(windowlrc.unPlay.red())+'+'+ QString::number(windowlrc.unPlay.green()) 
 		+ '+' + QString::number(windowlrc.unPlay.blue()) );
 	gs.setValue("WindowLrc/winPlayedColor", QString::number(windowlrc.played.red()) + '+' + QString::number(windowlrc.played.green())
@@ -738,7 +747,7 @@ void setWidget::saveDeskLrc()
 {
 	QSettings gs("data/setWidget.ini", QSettings::IniFormat);
 
-	gs.setValue("DeskLrc/deFontName", desklrc.fontName);
+	gs.setValue("DeskLrc/deFontName", QString::number(fontBox->findText(desklrc.fontName)));
 
 	gs.setValue("DeskLrc/deUnplayColor", QString::number(desklrc.unPlay[0].red()) + '+' + QString::number(desklrc.unPlay[0].green())
 		+ '+' + QString::number(desklrc.unPlay[0].blue())

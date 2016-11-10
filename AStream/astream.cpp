@@ -44,11 +44,11 @@
 #endif
 
 AStream::AStream(QWidget *parent)
-	: QWidget(parent), keepTrayIcon(true),isMute(false),volume(80),isPress(false),currentMode(orderPlay),isLike(false),isPause(true),isBlock(true),isDeskLrc(true),isPureColor(false)
+	: QWidget(parent), keepTrayIcon(true),isMute(false),volume(80),isPress(false),currentMode(orderPlay),isLike(false),isPause(true),isBlock(true),isDeskLrc(true),isPureColor(false), isHotKey(false)
 {
 	try
 	{
-
+		shotKey=prevKey=nextKey=highKey=lowKey=pauseKey=muteKey=-1;
 		createSubCom();
 		readConfig();
 		setSubObjectName();
@@ -61,6 +61,7 @@ AStream::AStream(QWidget *parent)
 		setWindowIcon(tray->icon());
 		setWindowFlags(Qt::FramelessWindowHint);
 
+		setter->getSet();
 	}
 	catch (std::bad_alloc &)
 	{
@@ -542,56 +543,29 @@ int AStream::getVolume()
 	return volume;
 }
 
-void AStream::loadHotKey()
+void AStream::setHotkey(hotKeys &hot)
 {
-	
-	QSettings hotKeys("data/hotKey.ini", QSettings::IniFormat);
+	auto id = reinterpret_cast<HWND>(this->winId());
 
-	auto getOneKey = [this,&hotKeys](int &oneKey,const QString &keyValue)
+	auto getOneKey = [this,&id](int &oneKey,QString &result,int modifier,int keys)
 	{
-		QString result = hotKeys.value(keyValue).toString();
 		oneKey = GlobalAddAtomA(result.toStdString().c_str());
-		auto metaKeys = result.split('+');
-		int ctrlKey = 0;
-		char realKey = 'Q';
-		for (auto singleKey : metaKeys)
-		{
-			if (singleKey == "Ctrl")
-			{
-				ctrlKey |= MOD_CONTROL;
-			}
-			else if (singleKey == "Alt")
-			{
-				ctrlKey |= MOD_ALT;
-			}
-			else if (singleKey == "Shift")
-			{
-				ctrlKey |= MOD_SHIFT;
-			}
-			else if (singleKey == "Shift")
-			{
-				ctrlKey |= MOD_SHIFT;
-			}
-			else
-			{
-				realKey = singleKey.toInt();
-			}
-		}
-		auto b = RegisterHotKey(reinterpret_cast<HWND>(this->winId()), oneKey, ctrlKey, realKey);
-		if (!b)
-		{
-			UnregisterHotKey(reinterpret_cast<HWND>(this->winId()), oneKey);
-			RegisterHotKey(reinterpret_cast<HWND>(this->winId()), oneKey, ctrlKey, realKey);
-		}
+		UnregisterHotKey(nullptr, oneKey);
+		
+		int ctrlKey = keyMap.find(modifier).value();
+		int realKey = keyMap.find(keys).value();
+		RegisterHotKey(id, oneKey, ctrlKey, realKey);
 	};
 	
-	getOneKey(shotKey, "Main/shotKey");
-	getOneKey(prevKey, "Main/prevKey");
-	getOneKey(nextKey, "Main/nextKey");
-	getOneKey(highKey, "Main/highKey");
-	getOneKey(lowKey, "Main/lowKey");
-	getOneKey(pauseKey, "Main/pauseKey");
+	getOneKey(shotKey,hot.screenShot,hot.screenShotKeys[0],hot.screenShotKeys[1]);
+	getOneKey(prevKey, hot.prevSong, hot.prevKeys[0], hot.prevKeys[1]);
+	getOneKey(nextKey, hot.nextSong, hot.nextKeys[0], hot.nextKeys[1]);
+	getOneKey(highKey, hot.higher, hot.higherKeys[0], hot.higherKeys[1]);
+	getOneKey(lowKey, hot.lower, hot.lowerKeys[0], hot.lowerKeys[1]);
+	getOneKey(pauseKey, hot.playPause, hot.playKeys[0], hot.playKeys[1]);
+	getOneKey(muteKey, hot.mute, hot.muteKeys[0], hot.muteKeys[1]);
 
+	isHotKey = hot.isHotKey;
 }
 
 void AStream::createSubCom()
@@ -756,7 +730,6 @@ void AStream::readConfig()
 
 	setAcceptDrops(true);
 	qApp->installNativeEventFilter(this);
-	loadHotKey();
 
 	keepTrayIcon = set.value("keepTrayIcon").toInt();
 	isMute = set.value("isMute").toInt();
@@ -799,6 +772,40 @@ void AStream::readConfig()
 	aboutLAVW->hide();
 	aboutFFW->hide();
 	skinModifier->hide();
+
+	for (int i = 0x01000030, j = 0x70; i < 0x0100003c; i++, j++)
+	{
+		keyMap.insert(i, j);
+	}
+
+	for (int i = 0x01000012, j = 0x25; i <= 0x01000015; j++, i++)
+	{
+		keyMap.insert(i, j);
+	}
+
+	for (int i = '0'; i <= 'Z'; i++)
+	{
+		keyMap.insert(i, i);
+	}
+
+	keyMap.insert(Qt::ShiftModifier, MOD_SHIFT);
+	keyMap.insert(Qt::ControlModifier, MOD_CONTROL);
+	keyMap.insert(Qt::AltModifier, MOD_ALT);
+	keyMap.insert(Qt::ShiftModifier | Qt::ControlModifier, MOD_SHIFT | MOD_CONTROL);
+	keyMap.insert(Qt::ShiftModifier | Qt::AltModifier, MOD_SHIFT | MOD_ALT);
+	keyMap.insert(Qt::ControlModifier | Qt::AltModifier, MOD_CONTROL | MOD_ALT);
+	keyMap.insert(Qt::ShiftModifier | Qt::ControlModifier | Qt::AltModifier, MOD_SHIFT | MOD_CONTROL | MOD_ALT);
+
+	keyMap.insert(0x2d, 0xBD);
+	keyMap.insert(0x3d, 0x92);
+	keyMap.insert(0x5b, 0xDB);
+	keyMap.insert(0x5d, 0xDD);
+	keyMap.insert(0x60, 0xC0);
+	keyMap.insert(0x3b, 0xBA);
+	keyMap.insert(0x27, 0xDE);
+	keyMap.insert(0x5c, 0xDC);
+	keyMap.insert(0x2c, 0xBC);
+	keyMap.insert(0x2f, 0xBF);
 
 }
 
@@ -937,6 +944,7 @@ void AStream::connectSignal()
 	connect(setter, &setWidget::resetWindowLrc, this, &AStream::setWindowLrc);
 	connect(setter, &setWidget::resetDeskLrc, this, &AStream::setDeskLrc);
 	connect(setter, &setWidget::resetNetwork, this, &AStream::setProxy);
+	connect(setter, &setWidget::resetHotKey,this,&AStream::setHotkey);
 
 	songSlider->installEventFilter(this);
 	volumeSlider->installEventFilter(this);
@@ -1182,6 +1190,11 @@ bool AStream::nativeEventFilter(const QByteArray &eventType, void *message, long
 		return false;
 	}
 
+	if (isHotKey == false)
+	{
+		return false;
+	}
+
 	auto parameter = msg->wParam;
 	if (parameter == shotKey)
 	{
@@ -1219,6 +1232,11 @@ bool AStream::nativeEventFilter(const QByteArray &eventType, void *message, long
 		return true;
 	}
 
+	if (parameter == muteKey)
+	{
+		setMute(!getMute());
+	}
+
 	return false;
 }
 
@@ -1243,7 +1261,7 @@ void AStream::setWindowLrc(windowLrc &win)
 	lyricsBar->setUnplay(win.unPlay);
 	lyricsBar->setPlayed(win.played);
 	lyricsBar->setFontStyle(win.type);
-
+	
 }
 
 void AStream::setDeskLrc(deskLrc &lrc)

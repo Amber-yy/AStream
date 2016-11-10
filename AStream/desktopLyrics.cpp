@@ -14,8 +14,11 @@ desktopLyrics::desktopLyrics(int w, int h, QWidget *parent):tranWidget(w,h,paren
 		font.setPixelSize(32);
 		showTiltle(false);
 
-		pix = QPixmap(980, 116);
+		pix = std::move(QPixmap(980, 116));
 		pix.fill(Qt::transparent);
+
+		movePix = std::move(QPixmap(980, 58));
+		movePix.fill(Qt::transparent);
 
 		normalGradient1.setStart(0,0);
 		normalGradient1.setFinalStop(0, 58);
@@ -135,14 +138,14 @@ void desktopLyrics::paintEvent(QPaintEvent *e)
 			QPainter firstPainter(&pix);
 			firstPainter.setFont(font);
 			firstPainter.setPen(QColor(0, 0, 0));
-			firstPainter.drawText(1, 1, 800, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
+			firstPainter.drawText(1, 1, 980, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
 			firstPainter.setPen(QPen(normalGradient1, 0));
-			firstPainter.drawText(0, 0, 800, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
+			firstPainter.drawText(0, 0, 980, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
 
 			firstPainter.setPen(QColor(0, 0, 0));
-			firstPainter.drawText(1, 59, 800, 58, Qt::AlignVCenter | Qt::AlignRight, second);
+			firstPainter.drawText(1, 59, 980, 58, Qt::AlignVCenter | Qt::AlignRight, second);
 			firstPainter.setPen(QPen(normalGradient2, 0));
-			firstPainter.drawText(0, 58, 800, 58, Qt::AlignVCenter | Qt::AlignRight, second);
+			firstPainter.drawText(0, 58, 980, 58, Qt::AlignVCenter | Qt::AlignRight, second);
 
 			temp = pix;
 			repaintAll = false;
@@ -166,29 +169,43 @@ void desktopLyrics::paintEvent(QPaintEvent *e)
 		{
 			QPainter firstPainter(&pix);
 			firstPainter.setFont(font);
-			firstPainter.setPen(QColor(0, 0, 0));
-			firstPainter.drawText(1, 59, 800, 58, Qt::AlignVCenter | Qt::AlignRight, first);
-			firstPainter.setPen(QPen(normalGradient2, 0));
-			firstPainter.drawText(0, 58, 800, 58, Qt::AlignVCenter | Qt::AlignRight, first);
 
 			firstPainter.setPen(QColor(0, 0, 0));
-			firstPainter.drawText(1, 1, 800, 58, Qt::AlignVCenter | Qt::AlignLeft, second);
+			firstPainter.drawText(1, 1, 980, 58, Qt::AlignVCenter | Qt::AlignLeft, second);
 			firstPainter.setPen(QPen(normalGradient1, 0));
-			firstPainter.drawText(0, 0, 800, 58, Qt::AlignVCenter | Qt::AlignLeft, second);
+			firstPainter.drawText(0, 0, 980, 58, Qt::AlignVCenter | Qt::AlignLeft, second);
 
 			temp = pix;
+			QPainter tempPainter(&temp);
+			tempPainter.setFont(font);
+			tempPainter.setPen(QColor(0, 0, 0));
+			tempPainter.drawText(1, 59, 980, 58, Qt::AlignVCenter | Qt::AlignRight, first);
+			tempPainter.setPen(QPen(normalGradient2, 0));
+			tempPainter.drawText(0, 58, 980, 58, Qt::AlignVCenter | Qt::AlignRight, first);
 			repaintAll = false;
 		}
 		else
 		{
 			temp = pix;
+
 			if (progress <= 1)
 			{
-				QPainter mask(&temp);
+				movePix.fill(Qt::transparent);
+				QPainter mask(&movePix);
 				mask.setFont(font);
-				mask.setPen(QPen(maskGradient2, 0));
-				mask.drawText(800 - maxPix, 58, progress*maxPix, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
+
+				mask.setPen(QColor(0, 0, 0));
+				mask.drawText(1, 1, 980, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
+				mask.setPen(QPen(normalGradient1, 0));
+				mask.drawText(0, 0, 980, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
+
+				mask.setPen(QPen(maskGradient1, 0));
+				mask.drawText(0, 0, progress*maxPix, 58, Qt::AlignVCenter | Qt::AlignLeft, first);
+
+				QPainter tempPainter(&temp);
+				tempPainter.drawPixmap((980-maxPix), 58, movePix);
 			}
+
 		}
 	}
 

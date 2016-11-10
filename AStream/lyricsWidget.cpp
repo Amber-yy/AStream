@@ -11,8 +11,10 @@ lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent),playProgress(0),repa
 {
 	try
 	{
-		pix = QPixmap(540,410);
+		pix = std::move(QPixmap(540,410));
 		pix.fill(Qt::transparent);
+		movePix= std::move(QPixmap(540, 56));
+		movePix.fill(Qt::transparent);
 
 		deskLyrics = std::make_shared<desktopLyrics>(980, 116);
 		deskLyrics->setColor(QColor(102, 204, 250, 1));
@@ -36,10 +38,11 @@ lyricsWidget::lyricsWidget(QWidget *parent):QWidget(parent),playProgress(0),repa
 		setGeo(sixthRect, "sixth");
 		setGeo(seventhRect, "seventh");
 
-		font.setFamily(u8"ºÚÌå");
+		font.setFamily(u8"Î¢ÈíÑÅºÚ");
 		font.setPixelSize(22);
 		maskStartPoint.setY(fourthRect.y());
-
+		 unplay=Qt::white;
+		 played = Qt::yellow;
 	}
 	catch(std::bad_alloc &)
 	{
@@ -101,7 +104,7 @@ void lyricsWidget::updateLyrics(size_t duration)
 	auto str = fourth.toStdWString();
 	maxPix = deskLyrics->getMaxPix()*font.pixelSize()/2;
 	maskStartPoint.setX((540 - maxPix) / 2);
-	
+
 	if (size > currentIndex+1&&duration>=allLyrics[currentIndex+1].duration)
 	{
 		repaintAll = true;
@@ -355,9 +358,6 @@ void lyricsWidget::paintEvent(QPaintEvent *e)
 		painter.drawText(thirdRect, Qt::AlignCenter, third);
 
 		painter.setPen(unplay);
-		painter.drawText(fourthRect, Qt::AlignCenter, fourth);
-
-		painter.setPen(unplay);
 		painter.drawText(fifthRect, Qt::AlignCenter, fifth);
 
 		painter.setPen(unplay);
@@ -368,19 +368,28 @@ void lyricsWidget::paintEvent(QPaintEvent *e)
 
 		temp = pix;
 		moveRest = 56;
+
+		QPainter tempPainter(&temp);
+		tempPainter.setPen(unplay);
+		tempPainter.drawText(fourthRect, Qt::AlignCenter, fourth);
 		repaintAll = false;
 		update();
 	}
 	else
 	{
 		temp = pix;
-		QPainter painter(&temp);
-		painter.setFont(font);
 
 		if (playProgress <= 1)
 		{
+			QPainter painter(&movePix);
+			movePix.fill(Qt::transparent);
+			painter.setFont(font);
+			painter.setPen(unplay);
+			painter.drawText(0, 0,560, 56, Qt::AlignVCenter | Qt::AlignLeft, fourth);
 			painter.setPen(played);
-			painter.drawText(maskStartPoint.x(), maskStartPoint.y(), playProgress*maxPix, 56, Qt::AlignVCenter | Qt::AlignLeft, fourth);
+			painter.drawText(0,0, playProgress*maxPix, 56, Qt::AlignVCenter | Qt::AlignLeft, fourth);
+			QPainter tempPainter(&temp);
+			tempPainter.drawPixmap((540-maxPix)/2,56*3,movePix);
 		}
 	}
 

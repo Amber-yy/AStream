@@ -23,6 +23,7 @@ class setWidget : public tranWidget
 	Q_OBJECT
 public:
 	setWidget(int,int,QWidget *parent = 0);
+	void getSet();
 	~setWidget();
 protected:
 	generalSet general;

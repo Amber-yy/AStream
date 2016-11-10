@@ -8,6 +8,8 @@
 
 class QLabel;
 
+#include <QDebug>
+
 class lyricsWidget : public QWidget
 {
 	Q_OBJECT

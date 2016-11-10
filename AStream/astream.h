@@ -9,7 +9,7 @@
 #include "songWidget.h"
 #include "setStructs.h"
 
-#include <stdio.h>
+#include <QMap>
 
 class lrcDecoder;
 class trayIcon;
@@ -67,7 +67,7 @@ public:
 	void setLock(bool);
 	int getVolume();
 private:
-	void loadHotKey();
+	void setHotkey(hotKeys &);
 	void createSubCom();
 	void readConfig();
 	void setSubObjectName();
@@ -98,6 +98,7 @@ protected:
 	void setDeskLrc(deskLrc &);
 	void setProxy(networkSet &);
 protected:
+	QMap<int, int> keyMap;
 	QPixmap skin;
 	QColor currentColor;
 	QPoint lastPos;
@@ -142,7 +143,7 @@ protected:
 	static const size_t maxSongName=34;
 	size_t maxDuration,playProgress,lastUpdateTime;
 	int volume;
-	int shotKey,prevKey,nextKey,highKey,lowKey,pauseKey;
+	int shotKey,prevKey,nextKey,highKey,lowKey,pauseKey,muteKey;
 	bool isDeskLrc;
 	bool keepTrayIcon;
 	bool resetLyrics;
@@ -154,6 +155,7 @@ protected:
 	bool isPureColor;
 	bool isAutoPlay;
 	bool playHello;
+	bool isHotKey;
 };
 
 #endif // ASTREAM_H
